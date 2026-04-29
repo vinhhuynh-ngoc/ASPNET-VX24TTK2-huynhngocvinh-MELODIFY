@@ -1,0 +1,103 @@
+@model Melodify.Models.DTOs.AlbumDto
+@using System.Text.Json
+
+@{
+    ViewData["Title"] = Model.Title;
+    var tracksJson = JsonSerializer.Serialize(Model.Tracks, new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
+    var playlists = ViewBag.UserPlaylists as IEnumerable<Melodify.Models.DTOs.PlaylistDto> ?? new List<Melodify.Models.DTOs.PlaylistDto>();
+}
+
+<div class="hero-section">
+    <img src="@Model.CoverImage" onerror="this.src='https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=300&h=300&fit=crop'" class="hero-cover" alt="" />
+    <div class="hero-info text-white">
+        <span class="hero-type">Album</span>
+        <h1 class="hero-title">@Model.Title</h1>
+        <div class="hero-meta">
+            <a href="/Artist/Detail/@Model.ArtistId" class="fw-bold text-white hover-underline">@Model.ArtistName</a>
+            <span class="hero-meta-secondary">&bull;</span>
+            <span class="hero-meta-secondary">@Model.ReleaseYear</span>
+            <span class="hero-meta-secondary">&bull;</span>
+            <span class="hero-meta-secondary">@Model.Tracks.Count bài hát</span>
+        </div>
+    </div>
+</div>
+
+<div class="action-bar">
+    <button class="btn-play-hero" onclick="playAllTracks()">
+        <i class="bi bi-play-fill text-dark"></i>
+    </button>
+</div>
+
+<div class="content-wrapper pt-0">
+    <table class="track-table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Tiêu đề</th>
+                <th></th>
+                <th class="text-end"><i class="bi bi-clock"></i></th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < Model.Tracks.Count; i++)
+            {
+                var track = Model.Tracks[i];
+                <tr class="track-row" data-track-id="@track.TrackId" onclick="playTrackAt(@i)">
+                    <td class="track-number">@(i + 1)</td>
+                    <td>
+                        <div class="track-title-container">
+                            <div class="track-meta">
+                                <span class="track-title-cell">@track.Title</span>
+                                <span class="track-artist-cell">@track.ArtistName</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td onclick="event.stopPropagation();">
+                        <div class="d-flex align-items-center gap-3 justify-content-end">
+                            <button class="btn p-0 text-secondary btn-like-track @(track.IsLiked ? "text-success" : "")" data-track-id="@track.TrackId" onclick="toggleLike(this, @track.TrackId)">
+                                <i class="bi @(track.IsLiked ? "bi-heart-fill" : "bi-heart")"></i>
+                            </button>
+                            
+                            <div class="dropdown-action">
+                                <button class="btn p-0 text-secondary">
+                                    <i class="bi bi-three-dots"></i>
+                                </button>
+                                <div class="dropdown-menu-custom">
+                                    @foreach (var playlist in playlists)
+                                    {
+                                        <button onclick="addToPlaylist(@playlist.PlaylistId, @track.TrackId)">Thêm vào @playlist.Name</button>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="track-duration-cell">
+                        @{
+                            var min = track.Duration / 60;
+                            var sec = track.Duration % 60;
+                            var secStr = sec < 10 ? "0" + sec : sec.ToString();
+                        }
+                        @min:@secStr
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@section Scripts {
+    <script src="/js/playlist.js"></script>
+    <script>
+        var albumTracks = @Html.Raw(tracksJson);
+
+        function playTrackAt(index) {
+            setPlaylist(albumTracks, index);
+        }
+
+        function playAllTracks() {
+            if (albumTracks.length > 0) {
+                setPlaylist(albumTracks, 0);
+            }
+        }
+    </script>
+}

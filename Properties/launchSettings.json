@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json.schemastore.org/launchsettings.json",
+  "profiles": {
+    "http": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchBrowser": true,
+      "applicationUrl": "http://localhost:5103",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "ConnectionStrings__DefaultConnection": "Server=sql12.freesqldatabase.com;Port=3306;Database=sql12830687;Uid=sql12830687;Pwd=AFVSJcLVZl;",
+        "SeedSettings__AdminEmail": "admin@melodify.com",
+        "SeedSettings__AdminPassword": "Admin123",
+        "SeedSettings__AdminFullName": "Admin Melodify",
+        "SeedSettings__TestUserEmail": "user@melodify.com",
+        "SeedSettings__TestUserPassword": "User123",
+        "SeedSettings__TestUserFullName": "Minh Khôi",
+        "AppUrls__BackendUrl": "http://localhost:5103",
+        "AppUrls__FrontendUrl": "http://localhost:5103"
+      }
+    },
+    "https": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchBrowser": true,
+      "applicationUrl": "https://localhost:7019;http://localhost:5103",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "ConnectionStrings__DefaultConnection": "Server=sql12.freesqldatabase.com;Port=3306;Database=sql12830687;Uid=sql12830687;Pwd=AFVSJcLVZl;",
+        "SeedSettings__AdminEmail": "admin@melodify.com",
+        "SeedSettings__AdminPassword": "Admin123",
+        "SeedSettings__AdminFullName": "Admin Melodify",
+        "SeedSettings__TestUserEmail": "user@melodify.com",
+        "SeedSettings__TestUserPassword": "User123",
+        "SeedSettings__TestUserFullName": "Minh Khôi",
+        "AppUrls__BackendUrl": "https://localhost:7019",
+        "AppUrls__FrontendUrl": "https://localhost:7019"
+      }
+    }
+  }
+}

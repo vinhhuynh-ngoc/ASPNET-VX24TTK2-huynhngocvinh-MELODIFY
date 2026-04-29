@@ -1,0 +1,103 @@
+@model Melodify.Models.DTOs.PlaylistDto
+@using System.Text.Json
+
+@{
+    ViewData["Title"] = Model.Name;
+    var tracksJson = JsonSerializer.Serialize(Model.Tracks, new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
+}
+
+<div class="hero-section">
+    <div class="hero-cover d-flex align-items-center justify-content-center bg-gradient text-white" style="background: linear-gradient(135deg, #1e3c72, #2a5298); width: 232px; height: 232px;">
+        <i class="bi bi-music-note-beamed" style="font-size: 80px;"></i>
+    </div>
+    <div class="hero-info text-white">
+        <span class="hero-type">Playlist</span>
+        <h1 class="hero-title">@Model.Name</h1>
+        <div class="hero-meta">
+            <span class="fw-bold">@Model.UserName</span>
+            <span class="hero-meta-secondary">&bull;</span>
+            <span class="hero-meta-secondary">@Model.Tracks.Count bài hát</span>
+        </div>
+    </div>
+</div>
+
+<div class="action-bar d-flex justify-content-between align-items-center">
+    <div class="d-flex align-items-center gap-4">
+        <button class="btn-play-hero" onclick="playAllTracks()">
+            <i class="bi bi-play-fill text-dark"></i>
+        </button>
+    </div>
+    <div>
+        <form asp-controller="Playlist" asp-action="Delete" method="post" onsubmit="return confirm('Bạn có chắc chắn muốn xóa danh sách phát này?');">
+            @Html.AntiForgeryToken()
+            <input type="hidden" name="playlistId" value="@Model.PlaylistId" />
+            <button type="submit" class="btn btn-outline-danger rounded-pill px-4">Xóa Playlist</button>
+        </form>
+    </div>
+</div>
+
+<div class="content-wrapper pt-0">
+    <table class="track-table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Tiêu đề</th>
+                <th></th>
+                <th class="text-end"><i class="bi bi-clock"></i></th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < Model.Tracks.Count; i++)
+            {
+                var track = Model.Tracks[i];
+                <tr class="track-row" data-track-id="@track.TrackId" onclick="playTrackAt(@i)">
+                    <td class="track-number">@(i + 1)</td>
+                    <td>
+                        <div class="track-title-container">
+                            <img src="@track.CoverImage" onerror="this.src='https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=100&h=100&fit=crop'" class="track-cover-mini" alt="" />
+                            <div class="track-meta">
+                                <span class="track-title-cell">@track.Title</span>
+                                <span class="track-artist-cell">@track.ArtistName</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td onclick="event.stopPropagation();">
+                        <div class="d-flex align-items-center gap-3 justify-content-end">
+                            <button class="btn p-0 text-secondary btn-like-track @(track.IsLiked ? "text-success" : "")" data-track-id="@track.TrackId" onclick="toggleLike(this, @track.TrackId)">
+                                <i class="bi @(track.IsLiked ? "bi-heart-fill" : "bi-heart")"></i>
+                            </button>
+                            <button class="btn p-0 text-secondary" onclick="removeFromPlaylist(@Model.PlaylistId, @track.TrackId, this)">
+                                <i class="bi bi-trash-fill text-danger"></i>
+                            </button>
+                        </div>
+                    </td>
+                    <td class="track-duration-cell">
+                        @{
+                            var min = track.Duration / 60;
+                            var sec = track.Duration % 60;
+                            var secStr = sec < 10 ? "0" + sec : sec.ToString();
+                        }
+                        @min:@secStr
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@section Scripts {
+    <script src="/js/playlist.js"></script>
+    <script>
+        var playlistTracks = @Html.Raw(tracksJson);
+
+        function playTrackAt(index) {
+            setPlaylist(playlistTracks, index);
+        }
+
+        function playAllTracks() {
+            if (playlistTracks.length > 0) {
+                setPlaylist(playlistTracks, 0);
+            }
+        }
+    </script>
+}

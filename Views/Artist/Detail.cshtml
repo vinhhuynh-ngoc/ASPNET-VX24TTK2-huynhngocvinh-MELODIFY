@@ -1,0 +1,143 @@
+@model Melodify.Models.DTOs.ArtistDto
+@using System.Text.Json
+
+@{
+    ViewData["Title"] = Model.Name;
+    var popularTracks = ViewBag.PopularTracks as IEnumerable<Melodify.Models.DTOs.TrackDto> ?? new List<Melodify.Models.DTOs.TrackDto>();
+    var albums = ViewBag.Albums as IEnumerable<Melodify.Models.DTOs.AlbumDto> ?? new List<Melodify.Models.DTOs.AlbumDto>();
+    var playlists = ViewBag.UserPlaylists as IEnumerable<Melodify.Models.DTOs.PlaylistDto> ?? new List<Melodify.Models.DTOs.PlaylistDto>();
+    var tracksJson = JsonSerializer.Serialize(popularTracks, new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
+}
+
+<div class="hero-section" style="background: linear-gradient(transparent, rgba(18, 18, 18, 0.9)), url('@Model.ImageUrl') center/cover no-repeat; height: 350px;">
+    <div class="hero-info text-white pb-3 ps-2">
+        <span class="d-flex align-items-center gap-2 mb-2">
+            <i class="bi bi-patch-check-fill text-info"></i>
+            <span class="hero-type">Nghệ sĩ xác minh</span>
+        </span>
+        <h1 class="hero-title" style="font-size: 80px;">@Model.Name</h1>
+        <div class="hero-meta">
+            <span>@Model.MonthlyListeners.ToString("N0") người nghe hàng tháng</span>
+        </div>
+    </div>
+</div>
+
+<div class="action-bar gap-3">
+    <button class="btn-play-hero" onclick="playAllPopular()">
+        <i class="bi bi-play-fill text-dark"></i>
+    </button>
+    
+    <button id="btn-follow-artist" class="btn-action-outline" data-artist-id="@Model.ArtistId" onclick="toggleFollow()">
+        @(Model.IsFollowed ? "Đang theo dõi" : "Theo dõi")
+    </button>
+</div>
+
+<div class="content-wrapper pt-0">
+    <div class="row">
+        <div class="col-12 col-lg-8">
+            <h2 class="section-title">Phổ biến</h2>
+            <table class="track-table">
+                <tbody>
+                    @for (int i = 0; i < popularTracks.Count(); i++)
+                    {
+                        var track = popularTracks.ElementAt(i);
+                        <tr class="track-row" data-track-id="@track.TrackId" onclick="playPopularTrackAt(@i)">
+                            <td class="track-number">@(i + 1)</td>
+                            <td>
+                                <div class="track-title-container">
+                                    <img src="@track.CoverImage" onerror="this.src='https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=100&h=100&fit=crop'" class="track-cover-mini" alt="" />
+                                    <span class="track-title-cell">@track.Title</span>
+                                </div>
+                            </td>
+                            <td onclick="event.stopPropagation();">
+                                <div class="d-flex align-items-center gap-3 justify-content-end">
+                                    <button class="btn p-0 text-secondary btn-like-track @(track.IsLiked ? "text-success" : "")" data-track-id="@track.TrackId" onclick="toggleLike(this, @track.TrackId)">
+                                        <i class="bi @(track.IsLiked ? "bi-heart-fill" : "bi-heart")"></i>
+                                    </button>
+
+                                    <div class="dropdown-action">
+                                        <button class="btn p-0 text-secondary">
+                                            <i class="bi bi-three-dots"></i>
+                                        </button>
+                                        <div class="dropdown-menu-custom">
+                                            @foreach (var playlist in playlists)
+                                            {
+                                                <button onclick="addToPlaylist(@playlist.PlaylistId, @track.TrackId)">Thêm vào @playlist.Name</button>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="track-duration-cell">
+                                @{
+                                    var min = track.Duration / 60;
+                                    var sec = track.Duration % 60;
+                                    var secStr = sec < 10 ? "0" + sec : sec.ToString();
+                                }
+                                @min:@secStr
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="col-12 col-lg-4">
+            <h2 class="section-title">Giới thiệu</h2>
+            <div class="bg-card p-4 rounded" style="background-color: var(--bg-card);">
+                <p class="text-secondary" style="line-height: 1.8;">@Model.Bio</p>
+            </div>
+        </div>
+    </div>
+
+    @if (albums.Any())
+    {
+        <h2 class="section-title mt-5">Album</h2>
+        <div class="card-grid">
+            @foreach (var album in albums)
+            {
+                <div class="music-card" onclick="navigateTo('/Album/Detail/@album.AlbumId')">
+                    <div class="card-image-container">
+                        <img src="@album.CoverImage" onerror="this.src='https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=300&h=300&fit=crop'" class="card-image" alt="" />
+                    </div>
+                    <div class="card-title">@album.Title</div>
+                    <div class="card-description">@album.ReleaseYear</div>
+                </div>
+            }
+        </div>
+    }
+</div>
+
+@section Scripts {
+    <script src="/js/playlist.js"></script>
+    <script>
+        var popularTracks = @Html.Raw(tracksJson);
+
+        function playPopularTrackAt(index) {
+            setPlaylist(popularTracks, index);
+        }
+
+        function playAllPopular() {
+            if (popularTracks.length > 0) {
+                setPlaylist(popularTracks, 0);
+            }
+        }
+
+        function toggleFollow() {
+            const btn = $('#btn-follow-artist');
+            const artistId = btn.data('artist-id');
+            const isFollowed = btn.text().trim() === 'Đang theo dõi';
+            const url = isFollowed ? '/Artist/Unfollow' : '/Artist/Follow';
+
+            $.post(url, { artistId }, function(data) {
+                if (data.success) {
+                    if (isFollowed) {
+                        btn.text('Theo dõi');
+                    } else {
+                        btn.text('Đang theo dõi');
+                    }
+                }
+            });
+        }
+    </script>
+}

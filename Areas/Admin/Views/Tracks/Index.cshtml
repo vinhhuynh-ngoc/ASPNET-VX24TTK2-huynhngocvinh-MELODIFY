@@ -1,0 +1,106 @@
+@model Melodify.Models.DTOs.PagedResult<Melodify.Models.DTOs.TrackDto>
+
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Quản lý bài hát";
+}
+
+<nav class="flex items-center gap-1 text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-6">
+    <a class="hover:text-foreground" href="/Admin">Admin</a>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-3"><path d="m9 18 6-6-6-6"></path></svg>
+    <span class="text-foreground">@ViewData["Title"]</span>
+</nav>
+
+<div class="flex items-end justify-between mb-6">
+    <h1 class="font-display text-3xl font-extrabold">@ViewData["Title"]</h1>
+    <a href="/Admin/Tracks/Upload" class="rounded-full bg-lime px-4 py-2 text-sm font-bold text-lime-foreground">+ Upload bài hát mới</a>
+</div>
+
+<form method="get" action="/Admin/Tracks" class="flex gap-3 mb-6 bg-surface p-4 rounded-xl border border-border/40">
+    <div class="flex-1">
+        <label class="text-xs font-semibold text-muted-foreground uppercase tracking-widest mb-1 block">Tìm kiếm</label>
+        <input type="text" name="search" value="@ViewBag.Search" placeholder="Tìm theo tên bài hát, thể loại..." class="w-full bg-white/5 border border-border rounded-lg px-3 py-2 text-sm text-foreground focus:outline-none focus:border-lime" />
+    </div>
+    <div class="w-48">
+        <label class="text-xs font-semibold text-muted-foreground uppercase tracking-widest mb-1 block">Nghệ sĩ</label>
+        <select name="artistId" asp-items="ViewBag.Artists" class="w-full bg-white/5 border border-border rounded-lg px-3 py-2 text-sm text-foreground focus:outline-none focus:border-lime appearance-none">
+            <option value="">Tất cả nghệ sĩ</option>
+        </select>
+    </div>
+    <div class="w-48">
+        <label class="text-xs font-semibold text-muted-foreground uppercase tracking-widest mb-1 block">Sắp xếp</label>
+        <select name="sortBy" class="w-full bg-white/5 border border-border rounded-lg px-3 py-2 text-sm text-foreground focus:outline-none focus:border-lime appearance-none">
+            <!option value="playCount_desc" @(ViewBag.SortBy == "playCount_desc" ? "selected" : "")>Lượt nghe giảm dần</!option>
+            <!option value="playCount_asc" @(ViewBag.SortBy == "playCount_asc" ? "selected" : "")>Lượt nghe tăng dần</!option>
+            <!option value="title_asc" @(ViewBag.SortBy == "title_asc" ? "selected" : "")>Tên (A-Z)</!option>
+            <!option value="title_desc" @(ViewBag.SortBy == "title_desc" ? "selected" : "")>Tên (Z-A)</!option>
+            <!option value="duration_desc" @(ViewBag.SortBy == "duration_desc" ? "selected" : "")>Thời lượng giảm dần</!option>
+            <!option value="duration_asc" @(ViewBag.SortBy == "duration_asc" ? "selected" : "")>Thời lượng tăng dần</!option>
+        </select>
+    </div>
+    <div class="flex items-end">
+        <button type="submit" class="bg-white/10 hover:bg-white/20 text-foreground border border-border rounded-lg px-4 py-2 text-sm font-semibold transition">Lọc</button>
+    </div>
+</form>
+
+<div class="overflow-hidden rounded-2xl border border-border/40 bg-surface">
+    <table class="w-full text-sm">
+        <thead class="bg-white/5 text-left text-[11px] font-bold uppercase tracking-widest text-muted-foreground">
+            <tr>
+                <th class="px-4 py-3">Ảnh</th>
+                <th class="px-4 py-3">Tên bài</th>
+                <th class="px-4 py-3">Nghệ sĩ</th>
+                <th class="px-4 py-3">Thể loại</th>
+                <th class="px-4 py-3 text-right">Thời lượng</th>
+                <th class="px-4 py-3 text-right">Lượt nghe</th>
+                <th class="px-4 py-3 text-right">Hành động</th>
+            </tr>
+        </thead>
+        <tbody class="divide-y divide-border/40">
+            @foreach (var track in Model.Items)
+            {
+                <tr class="transition hover:bg-white/5">
+                    <td class="px-4 py-3"><img alt="" class="size-10 rounded object-cover" src="@track.CoverImage" onerror="this.src='/uploads/covers/default.png'"></td>
+                    <td class="px-4 py-3 font-semibold">@track.Title</td>
+                    <td class="px-4 py-3 text-muted-foreground">@track.ArtistName</td>
+                    <td class="px-4 py-3 text-muted-foreground">@track.Genre</td>
+                    <td class="px-4 py-3 text-right tabular-nums text-muted-foreground">
+                        @{
+                            var min = track.Duration / 60;
+                            var sec = track.Duration % 60;
+                            var secStr = sec < 10 ? "0" + sec : sec.ToString();
+                        }
+                        @min:@secStr
+                    </td>
+                    <td class="px-4 py-3 text-right tabular-nums text-lime">@track.PlayCount.ToString("N0")</td>
+                    <td class="px-4 py-3">
+                        <div class="flex justify-end gap-1">
+                            <a href="/Admin/Tracks/Edit/@track.TrackId" class="grid size-8 place-items-center rounded-lg hover:bg-white/10 text-foreground">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"></path><path d="m15 5 4 4"></path></svg>
+                            </a>
+                            <form asp-area="Admin" asp-controller="Tracks" asp-action="Delete" asp-route-id="@track.TrackId" method="post" onsubmit="return confirm('Bạn có chắc chắn muốn xóa bài hát này?');" class="m-0">
+                                @Html.AntiForgeryToken()
+                                <button type="submit" class="grid size-8 place-items-center rounded-lg text-destructive hover:bg-destructive/15">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4"><path d="M3 6h18"></path><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path></svg>
+                                </button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@if (Model.TotalPages > 1)
+{
+    <div class="flex items-center justify-between text-sm text-muted-foreground mt-4">
+        <div>Hiển thị trang @Model.Page / @Model.TotalPages (Tổng: @Model.TotalCount bài hát)</div>
+        <div class="flex gap-1">
+            @for (int i = 1; i <= Model.TotalPages; i++)
+            {
+                <a href="/Admin/Tracks?page=@i&search=@ViewBag.Search&artistId=@ViewBag.ArtistId&sortBy=@ViewBag.SortBy" class="rounded-lg px-3 py-1.5 text-xs @(i == Model.Page ? "bg-lime font-bold text-lime-foreground" : "border border-border hover:bg-white/5")">@i</a>
+            }
+        </div>
+    </div>
+}

@@ -1,0 +1,710 @@
+{
+  "artists": [
+    {
+      "name": "Kai Đinh",
+      "bio": "Nghệ sĩ tài năng Kai Đinh với nhiều tác phẩm âm nhạc được yêu thích.",
+      "imageUrl": "https://images.unsplash.com/photo-1501386761578-eac5c94b800a?w=400&h=400&fit=crop",
+      "monthlyListeners": 534984
+    },
+    {
+      "name": "B Ray",
+      "bio": "Nghệ sĩ tài năng B Ray với nhiều tác phẩm âm nhạc được yêu thích.",
+      "imageUrl": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400&h=400&fit=crop",
+      "monthlyListeners": 736162
+    },
+    {
+      "name": "Minh Huy",
+      "bio": "Nghệ sĩ tài năng Minh Huy với nhiều tác phẩm âm nhạc được yêu thích.",
+      "imageUrl": "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop",
+      "monthlyListeners": 413260
+    },
+    {
+      "name": "buitruonglinh",
+      "bio": "Nghệ sĩ tài năng buitruonglinh với nhiều tác phẩm âm nhạc được yêu thích.",
+      "imageUrl": "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&h=400&fit=crop",
+      "monthlyListeners": 277404
+    },
+    {
+      "name": "Anh Bằng",
+      "bio": "Nghệ sĩ tài năng Anh Bằng với nhiều tác phẩm âm nhạc được yêu thích.",
+      "imageUrl": "https://images.unsplash.com/photo-1487180142328-0c4e37023af5?w=400&h=400&fit=crop",
+      "monthlyListeners": 621583
+    },
+    {
+      "name": "Ricky Star",
+      "bio": "Nghệ sĩ tài năng Ricky Star với nhiều tác phẩm âm nhạc được yêu thích.",
+      "imageUrl": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400&h=400&fit=crop",
+      "monthlyListeners": 451435
+    },
+    {
+      "name": "HIEUTHUHAI",
+      "bio": "Nghệ sĩ tài năng HIEUTHUHAI với nhiều tác phẩm âm nhạc được yêu thích.",
+      "imageUrl": "https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=400&h=400&fit=crop",
+      "monthlyListeners": 978918
+    },
+    {
+      "name": "VƯƠNG BÌNH",
+      "bio": "Nghệ sĩ tài năng VƯƠNG BÌNH với nhiều tác phẩm âm nhạc được yêu thích.",
+      "imageUrl": "https://images.unsplash.com/photo-1501386761578-eac5c94b800a?w=400&h=400&fit=crop",
+      "monthlyListeners": 734349
+    },
+    {
+      "name": "Quốc Thiên",
+      "bio": "Nghệ sĩ tài năng Quốc Thiên với nhiều tác phẩm âm nhạc được yêu thích.",
+      "imageUrl": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400&h=400&fit=crop",
+      "monthlyListeners": 763367
+    },
+    {
+      "name": "Đỗ Hoàng Long",
+      "bio": "Nghệ sĩ tài năng Đỗ Hoàng Long với nhiều tác phẩm âm nhạc được yêu thích.",
+      "imageUrl": "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop",
+      "monthlyListeners": 355585
+    },
+    {
+      "name": "Tọi",
+      "bio": "Nghệ sĩ tài năng Tọi với nhiều tác phẩm âm nhạc được yêu thích.",
+      "imageUrl": "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&h=400&fit=crop",
+      "monthlyListeners": 681438
+    },
+    {
+      "name": "NHONHO",
+      "bio": "Nghệ sĩ tài năng NHONHO với nhiều tác phẩm âm nhạc được yêu thích.",
+      "imageUrl": "https://images.unsplash.com/photo-1487180142328-0c4e37023af5?w=400&h=400&fit=crop",
+      "monthlyListeners": 997697
+    },
+    {
+      "name": "Dương Domic",
+      "bio": "Nghệ sĩ tài năng Dương Domic với nhiều tác phẩm âm nhạc được yêu thích.",
+      "imageUrl": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400&h=400&fit=crop",
+      "monthlyListeners": 915768
+    },
+    {
+      "name": "Bảo Anh",
+      "bio": "Nghệ sĩ tài năng Bảo Anh với nhiều tác phẩm âm nhạc được yêu thích.",
+      "imageUrl": "https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=400&h=400&fit=crop",
+      "monthlyListeners": 893458
+    },
+    {
+      "name": "Juky San",
+      "bio": "Nghệ sĩ tài năng Juky San với nhiều tác phẩm âm nhạc được yêu thích.",
+      "imageUrl": "https://images.unsplash.com/photo-1501386761578-eac5c94b800a?w=400&h=400&fit=crop",
+      "monthlyListeners": 884770
+    },
+    {
+      "name": "ThịnK",
+      "bio": "Nghệ sĩ tài năng ThịnK với nhiều tác phẩm âm nhạc được yêu thích.",
+      "imageUrl": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400&h=400&fit=crop",
+      "monthlyListeners": 173772
+    },
+    {
+      "name": "GREY D",
+      "bio": "Nghệ sĩ tài năng GREY D với nhiều tác phẩm âm nhạc được yêu thích.",
+      "imageUrl": "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop",
+      "monthlyListeners": 781574
+    },
+    {
+      "name": "Quang Hùng MasterD",
+      "bio": "Nghệ sĩ tài năng Quang Hùng MasterD với nhiều tác phẩm âm nhạc được yêu thích.",
+      "imageUrl": "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&h=400&fit=crop",
+      "monthlyListeners": 899382
+    },
+    {
+      "name": "Binz",
+      "bio": "Nghệ sĩ tài năng Binz với nhiều tác phẩm âm nhạc được yêu thích.",
+      "imageUrl": "https://images.unsplash.com/photo-1487180142328-0c4e37023af5?w=400&h=400&fit=crop",
+      "monthlyListeners": 827024
+    },
+    {
+      "name": "THIÊN ĐÌNH",
+      "bio": "Nghệ sĩ tài năng THIÊN ĐÌNH với nhiều tác phẩm âm nhạc được yêu thích.",
+      "imageUrl": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400&h=400&fit=crop",
+      "monthlyListeners": 199554
+    },
+    {
+      "name": "Nguyễn Thành Đạt",
+      "bio": "Nghệ sĩ tài năng Nguyễn Thành Đạt với nhiều tác phẩm âm nhạc được yêu thích.",
+      "imageUrl": "https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=400&h=400&fit=crop",
+      "monthlyListeners": 968193
+    },
+    {
+      "name": "Low G",
+      "bio": "Nghệ sĩ tài năng Low G với nhiều tác phẩm âm nhạc được yêu thích.",
+      "imageUrl": "https://images.unsplash.com/photo-1501386761578-eac5c94b800a?w=400&h=400&fit=crop",
+      "monthlyListeners": 857650
+    },
+    {
+      "name": "Minh Vương M4U",
+      "bio": "Nghệ sĩ tài năng Minh Vương M4U với nhiều tác phẩm âm nhạc được yêu thích.",
+      "imageUrl": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400&h=400&fit=crop",
+      "monthlyListeners": 308783
+    },
+    {
+      "name": "Hngle",
+      "bio": "Nghệ sĩ tài năng Hngle với nhiều tác phẩm âm nhạc được yêu thích.",
+      "imageUrl": "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop",
+      "monthlyListeners": 440990
+    },
+    {
+      "name": "Phí Phương Anh",
+      "bio": "Nghệ sĩ tài năng Phí Phương Anh với nhiều tác phẩm âm nhạc được yêu thích.",
+      "imageUrl": "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&h=400&fit=crop",
+      "monthlyListeners": 896323
+    },
+    {
+      "name": "Quang Đăng Trần",
+      "bio": "Nghệ sĩ tài năng Quang Đăng Trần với nhiều tác phẩm âm nhạc được yêu thích.",
+      "imageUrl": "https://images.unsplash.com/photo-1487180142328-0c4e37023af5?w=400&h=400&fit=crop",
+      "monthlyListeners": 674933
+    },
+    {
+      "name": "Ngô Mạnh Thắng",
+      "bio": "Nghệ sĩ tài năng Ngô Mạnh Thắng với nhiều tác phẩm âm nhạc được yêu thích.",
+      "imageUrl": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400&h=400&fit=crop",
+      "monthlyListeners": 874020
+    },
+    {
+      "name": "Châu Khải Phong",
+      "bio": "Nghệ sĩ tài năng Châu Khải Phong với nhiều tác phẩm âm nhạc được yêu thích.",
+      "imageUrl": "https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=400&h=400&fit=crop",
+      "monthlyListeners": 763003
+    },
+    {
+      "name": "Trọng Nhân",
+      "bio": "Nghệ sĩ tài năng Trọng Nhân với nhiều tác phẩm âm nhạc được yêu thích.",
+      "imageUrl": "https://images.unsplash.com/photo-1501386761578-eac5c94b800a?w=400&h=400&fit=crop",
+      "monthlyListeners": 619053
+    },
+    {
+      "name": "Ngô Lan Hương",
+      "bio": "Nghệ sĩ tài năng Ngô Lan Hương với nhiều tác phẩm âm nhạc được yêu thích.",
+      "imageUrl": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400&h=400&fit=crop",
+      "monthlyListeners": 219336
+    },
+    {
+      "name": "Obito",
+      "bio": "Nghệ sĩ tài năng Obito với nhiều tác phẩm âm nhạc được yêu thích.",
+      "imageUrl": "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop",
+      "monthlyListeners": 391357
+    },
+    {
+      "name": "Vũ Thuỳ Linh",
+      "bio": "Nghệ sĩ tài năng Vũ Thuỳ Linh với nhiều tác phẩm âm nhạc được yêu thích.",
+      "imageUrl": "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&h=400&fit=crop",
+      "monthlyListeners": 475107
+    },
+    {
+      "name": "Kiều Chi",
+      "bio": "Nghệ sĩ tài năng Kiều Chi với nhiều tác phẩm âm nhạc được yêu thích.",
+      "imageUrl": "https://images.unsplash.com/photo-1487180142328-0c4e37023af5?w=400&h=400&fit=crop",
+      "monthlyListeners": 451217
+    },
+    {
+      "name": "Nguyễn Hùng",
+      "bio": "Nghệ sĩ tài năng Nguyễn Hùng với nhiều tác phẩm âm nhạc được yêu thích.",
+      "imageUrl": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400&h=400&fit=crop",
+      "monthlyListeners": 354824
+    },
+    {
+      "name": "MIN",
+      "bio": "Nghệ sĩ tài năng MIN với nhiều tác phẩm âm nhạc được yêu thích.",
+      "imageUrl": "https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=400&h=400&fit=crop",
+      "monthlyListeners": 376389
+    },
+    {
+      "name": "DatKaa",
+      "bio": "Nghệ sĩ tài năng DatKaa với nhiều tác phẩm âm nhạc được yêu thích.",
+      "imageUrl": "https://images.unsplash.com/photo-1501386761578-eac5c94b800a?w=400&h=400&fit=crop",
+      "monthlyListeners": 924122
+    },
+    {
+      "name": "Việt Anh",
+      "bio": "Nghệ sĩ tài năng Việt Anh với nhiều tác phẩm âm nhạc được yêu thích.",
+      "imageUrl": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400&h=400&fit=crop",
+      "monthlyListeners": 568318
+    },
+    {
+      "name": "ANH TRAI \"SAY HI\"",
+      "bio": "Nghệ sĩ tài năng ANH TRAI \"SAY HI\" với nhiều tác phẩm âm nhạc được yêu thích.",
+      "imageUrl": "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop",
+      "monthlyListeners": 169586
+    },
+    {
+      "name": "Tóc Tiên",
+      "bio": "Nghệ sĩ tài năng Tóc Tiên với nhiều tác phẩm âm nhạc được yêu thích.",
+      "imageUrl": "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&h=400&fit=crop",
+      "monthlyListeners": 263535
+    },
+    {
+      "name": "Dfoxie37",
+      "bio": "Nghệ sĩ tài năng Dfoxie37 với nhiều tác phẩm âm nhạc được yêu thích.",
+      "imageUrl": "https://images.unsplash.com/photo-1487180142328-0c4e37023af5?w=400&h=400&fit=crop",
+      "monthlyListeners": 120834
+    },
+    {
+      "name": "MAYDAYs",
+      "bio": "Nghệ sĩ tài năng MAYDAYs với nhiều tác phẩm âm nhạc được yêu thích.",
+      "imageUrl": "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400&h=400&fit=crop",
+      "monthlyListeners": 253575
+    },
+    {
+      "name": "OgeNus",
+      "bio": "Nghệ sĩ tài năng OgeNus với nhiều tác phẩm âm nhạc được yêu thích.",
+      "imageUrl": "https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=400&h=400&fit=crop",
+      "monthlyListeners": 267382
+    },
+    {
+      "name": "VSTRA",
+      "bio": "Nghệ sĩ tài năng VSTRA với nhiều tác phẩm âm nhạc được yêu thích.",
+      "imageUrl": "https://images.unsplash.com/photo-1501386761578-eac5c94b800a?w=400&h=400&fit=crop",
+      "monthlyListeners": 826740
+    },
+    {
+      "name": "(S)TRONG",
+      "bio": "Nghệ sĩ tài năng (S)TRONG với nhiều tác phẩm âm nhạc được yêu thích.",
+      "imageUrl": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400&h=400&fit=crop",
+      "monthlyListeners": 225575
+    }
+  ],
+  "tracks": [
+    {
+      "title": "Lễ Đường",
+      "artist": "Kai Đinh",
+      "album": "NhacCuaTui.com",
+      "duration": 164,
+      "audioUrl": "/uploads/tracks/7c1e41ec-74ef-4593-969d-d09bf707917e.mp3",
+      "genre": "V-Pop"
+    },
+    {
+      "title": "Cho Con (Lullaby pt.2)",
+      "artist": "B Ray",
+      "album": "NhacCuaTui.com",
+      "duration": 210,
+      "audioUrl": "/uploads/tracks/c76ae14f-1ce0-40da-8ac3-5ce0adbe72ba.mp3",
+      "genre": "V-Pop"
+    },
+    {
+      "title": "Ngày Rời Chuyến Bay",
+      "artist": "Minh Huy",
+      "album": "NhacCuaTui.com",
+      "duration": 159,
+      "audioUrl": "/uploads/tracks/f023f402-5656-41b8-9732-99533435d347.mp3",
+      "genre": "V-Pop"
+    },
+    {
+      "title": "Sớm Như Vậy",
+      "artist": "buitruonglinh",
+      "album": "NhacCuaTui.com",
+      "duration": 153,
+      "audioUrl": "/uploads/tracks/30b93033-114d-4983-9a66-7f275c22732a.mp3",
+      "genre": "V-Pop"
+    },
+    {
+      "title": "Anh Tên Là",
+      "artist": "Anh Bằng",
+      "album": "NhacCuaTui.com",
+      "duration": 131,
+      "audioUrl": "/uploads/tracks/1bd3a543-b19b-4786-baa1-2056d4dbcc58.mp3",
+      "genre": "V-Pop"
+    },
+    {
+      "title": "Tấm lòng cửu long",
+      "artist": "Ricky Star",
+      "album": "NhacCuaTui.com",
+      "duration": 234,
+      "audioUrl": "/uploads/tracks/55ac3c1f-bf77-4e25-befc-81953c38097b.mp3",
+      "genre": "V-Pop"
+    },
+    {
+      "title": "Chờ Tới Khi Anh Về",
+      "artist": "HIEUTHUHAI",
+      "album": "NhacCuaTui.com",
+      "duration": 145,
+      "audioUrl": "/uploads/tracks/52b5a91e-1b0d-446c-bb6c-05824cb550d4.mp3",
+      "genre": "V-Pop"
+    },
+    {
+      "title": "Dạo Gần Đây Anh Thấy Anh Không Bằng Ai Hết",
+      "artist": "HIEUTHUHAI",
+      "album": "NhacCuaTui.com",
+      "duration": 142,
+      "audioUrl": "/uploads/tracks/6b2a6c24-d267-4689-9121-4f9e599ab282.mp3",
+      "genre": "V-Pop"
+    },
+    {
+      "title": "Thanh Tân",
+      "artist": "VƯƠNG BÌNH",
+      "album": "NhacCuaTui.com",
+      "duration": 135,
+      "audioUrl": "/uploads/tracks/98a16266-c089-4394-bcf5-1c4c194a6f10.mp3",
+      "genre": "V-Pop"
+    },
+    {
+      "title": "Người Im Lặng Gặp Người Hay Nói",
+      "artist": "HIEUTHUHAI",
+      "album": "NhacCuaTui.com",
+      "duration": 176,
+      "audioUrl": "/uploads/tracks/f230fd12-64e2-4065-99dd-de58088c9126.mp3",
+      "genre": "V-Pop"
+    },
+    {
+      "title": "Kẻ Say Tình",
+      "artist": "Quốc Thiên",
+      "album": "NhacCuaTui.com",
+      "duration": 210,
+      "audioUrl": "/uploads/tracks/8b58eb00-70d7-4230-baf3-85ef4bd15f8a.mp3",
+      "genre": "V-Pop"
+    },
+    {
+      "title": "Trạng Thái Mộng Mơ",
+      "artist": "Đỗ Hoàng Long",
+      "album": "NhacCuaTui.com",
+      "duration": 193,
+      "audioUrl": "/uploads/tracks/786fec7d-71de-42ae-a22f-f827898d515b.mp3",
+      "genre": "V-Pop"
+    },
+    {
+      "title": "Mắt Bão",
+      "artist": "Tọi",
+      "album": "NhacCuaTui.com",
+      "duration": 170,
+      "audioUrl": "/uploads/tracks/29974754-86fb-4821-a643-ab2460252dd3.mp3",
+      "genre": "V-Pop"
+    },
+    {
+      "title": "Dạo Bước HongKong 1999",
+      "artist": "NHONHO",
+      "album": "NhacCuaTui.com",
+      "duration": 146,
+      "audioUrl": "/uploads/tracks/933a6ac3-77f4-4220-884a-d54c0b4428e6.mp3",
+      "genre": "V-Pop"
+    },
+    {
+      "title": "Không Thời Gian",
+      "artist": "Dương Domic",
+      "album": "NhacCuaTui.com",
+      "duration": 143,
+      "audioUrl": "/uploads/tracks/ef1c16db-bc11-4930-9c88-b6c957a6c612.mp3",
+      "genre": "V-Pop"
+    },
+    {
+      "title": "Từng Là Của Nhau",
+      "artist": "Bảo Anh",
+      "album": "NhacCuaTui.com",
+      "duration": 178,
+      "audioUrl": "/uploads/tracks/3f0b144c-ac39-48dc-bf80-a2b4a6fe07b6.mp3",
+      "genre": "V-Pop"
+    },
+    {
+      "title": "Người Đầu Tiên",
+      "artist": "Juky San",
+      "album": "NhacCuaTui.com",
+      "duration": 141,
+      "audioUrl": "/uploads/tracks/e745c500-3b3f-44de-87de-31409555e4b2.mp3",
+      "genre": "V-Pop"
+    },
+    {
+      "title": "Ngàn Năm Ánh Sáng",
+      "artist": "ThịnK",
+      "album": "NhacCuaTui.com",
+      "duration": 149,
+      "audioUrl": "/uploads/tracks/95fc5fb3-61db-4305-9973-c314e24bdc02.mp3",
+      "genre": "V-Pop"
+    },
+    {
+      "title": "Toidaidot",
+      "artist": "GREY D",
+      "album": "NhacCuaTui.com",
+      "duration": 137,
+      "audioUrl": "/uploads/tracks/cc69b6d0-3856-4332-8512-0ce750832723.mp3",
+      "genre": "V-Pop"
+    },
+    {
+      "title": "Chất Gây Hại",
+      "artist": "Quang Hùng MasterD",
+      "album": "NhacCuaTui.com",
+      "duration": 179,
+      "audioUrl": "/uploads/tracks/989ccb27-dd30-4240-a95d-9bda51eae691.mp3",
+      "genre": "V-Pop"
+    },
+    {
+      "title": "Nếu (feat. Obito)",
+      "artist": "Binz",
+      "album": "NhacCuaTui.com",
+      "duration": 176,
+      "audioUrl": "/uploads/tracks/99f72f64-6ea2-47c2-9002-89d2fa11959f.mp3",
+      "genre": "V-Pop"
+    },
+    {
+      "title": "Em Thua Cô Ta (#1)",
+      "artist": "THIÊN ĐÌNH",
+      "album": "NhacCuaTui.com",
+      "duration": 187,
+      "audioUrl": "/uploads/tracks/db764e40-0906-4ef6-afb6-2f49917f4b8b.mp3",
+      "genre": "V-Pop"
+    },
+    {
+      "title": "Tệ Hại Và Xấu Xí",
+      "artist": "B Ray",
+      "album": "NhacCuaTui.com",
+      "duration": 139,
+      "audioUrl": "/uploads/tracks/2e4ac9eb-968b-49a7-ac39-9416651d9e21.mp3",
+      "genre": "V-Pop"
+    },
+    {
+      "title": "Thiệp Hồng Sai Tên",
+      "artist": "Nguyễn Thành Đạt",
+      "album": "NhacCuaTui.com",
+      "duration": 218,
+      "audioUrl": "/uploads/tracks/ca0cced6-d84f-4885-988e-01f746d4ccb4.mp3",
+      "genre": "V-Pop"
+    },
+    {
+      "title": "In Love",
+      "artist": "Low G",
+      "album": "NhacCuaTui.com",
+      "duration": 140,
+      "audioUrl": "/uploads/tracks/49f5996a-1af7-42d1-8ad3-c810c2237f65.mp3",
+      "genre": "V-Pop"
+    },
+    {
+      "title": "Vô Giá",
+      "artist": "Minh Vương M4U",
+      "album": "NhacCuaTui.com",
+      "duration": 154,
+      "audioUrl": "/uploads/tracks/2f5f86f1-4523-4351-99ee-14b51761676b.mp3",
+      "genre": "V-Pop"
+    },
+    {
+      "title": "Đừng Như Lời Họ Nói",
+      "artist": "B Ray",
+      "album": "NhacCuaTui.com",
+      "duration": 123,
+      "audioUrl": "/uploads/tracks/4ebfb1f1-753d-42e2-ae3d-0447a20f186e.mp3",
+      "genre": "V-Pop"
+    },
+    {
+      "title": "Không Buông",
+      "artist": "Hngle",
+      "album": "NhacCuaTui.com",
+      "duration": 123,
+      "audioUrl": "/uploads/tracks/c1f64a8f-774b-45a1-88c8-ad398313897e.mp3",
+      "genre": "V-Pop"
+    },
+    {
+      "title": "Vốn Đã Quen Một Mình",
+      "artist": "Phí Phương Anh",
+      "album": "NhacCuaTui.com",
+      "duration": 210,
+      "audioUrl": "/uploads/tracks/c086c299-67e9-496d-a2d1-7a0eca1707f9.mp3",
+      "genre": "V-Pop"
+    },
+    {
+      "title": "Anh Không Biết Cách Yêu Em",
+      "artist": "Quang Đăng Trần",
+      "album": "NhacCuaTui.com",
+      "duration": 169,
+      "audioUrl": "/uploads/tracks/25e82d21-830c-4d12-8f2d-24158b757ece.mp3",
+      "genre": "V-Pop"
+    },
+    {
+      "title": "Yêu Anh Thì Gật Đầu (Ver Nam)",
+      "artist": "Ngô Mạnh Thắng",
+      "album": "NhacCuaTui.com",
+      "duration": 141,
+      "audioUrl": "/uploads/tracks/86ab9792-3f64-4ed2-ba53-309e1917031c.mp3",
+      "genre": "V-Pop"
+    },
+    {
+      "title": "Bên Ấy Em Có Ai Rồi",
+      "artist": "Châu Khải Phong",
+      "album": "NhacCuaTui.com",
+      "duration": 210,
+      "audioUrl": "/uploads/tracks/54e3d1ac-c18f-4b12-9dc0-4fcff2b4da38.mp3",
+      "genre": "V-Pop"
+    },
+    {
+      "title": "Hôn Lễ Của Em",
+      "artist": "Trọng Nhân",
+      "album": "NhacCuaTui.com",
+      "duration": 130,
+      "audioUrl": "/uploads/tracks/52c5610b-191d-4206-9f77-df249c5d3281.mp3",
+      "genre": "V-Pop"
+    },
+    {
+      "title": "Có công mài \"Sắc\"",
+      "artist": "Ngô Lan Hương",
+      "album": "NhacCuaTui.com",
+      "duration": 151,
+      "audioUrl": "/uploads/tracks/a07836a9-2307-4a8e-b9f2-d109149a72a5.mp3",
+      "genre": "V-Pop"
+    },
+    {
+      "title": "Hoá Ra…",
+      "artist": "GREY D",
+      "album": "NhacCuaTui.com",
+      "duration": 134,
+      "audioUrl": "/uploads/tracks/1a3e716c-3dff-42b3-adc1-4850172bd431.mp3",
+      "genre": "V-Pop"
+    },
+    {
+      "title": "dự báo thời tiết hôm nay mưa",
+      "artist": "GREY D",
+      "album": "NhacCuaTui.com",
+      "duration": 193,
+      "audioUrl": "/uploads/tracks/f11e428a-bd93-46c2-9ba0-cc3b7a964bb8.mp3",
+      "genre": "V-Pop"
+    },
+    {
+      "title": "Em",
+      "artist": "Binz",
+      "album": "NhacCuaTui.com",
+      "duration": 145,
+      "audioUrl": "/uploads/tracks/cbe5757b-3792-469e-8fa5-ac2843093ea3.mp3",
+      "genre": "V-Pop"
+    },
+    {
+      "title": "Dạo Này",
+      "artist": "Obito",
+      "album": "NhacCuaTui.com",
+      "duration": 194,
+      "audioUrl": "/uploads/tracks/c4ab78dc-6684-477e-9edd-d3db3696f85f.mp3",
+      "genre": "V-Pop"
+    },
+    {
+      "title": "Trộm Vía",
+      "artist": "Vũ Thuỳ Linh",
+      "album": "NhacCuaTui.com",
+      "duration": 161,
+      "audioUrl": "/uploads/tracks/cdbd17d9-7cc1-42d3-b458-6922d0b31913.mp3",
+      "genre": "V-Pop"
+    },
+    {
+      "title": "Sau Này Em Cưới Ai Rồi (Lofi Meme)",
+      "artist": "Kiều Chi",
+      "album": "NhacCuaTui.com",
+      "duration": 197,
+      "audioUrl": "/uploads/tracks/a4faaadf-1d60-4e84-bc66-6f3a374d87f2.mp3",
+      "genre": "V-Pop"
+    },
+    {
+      "title": "Còn Gì Đẹp Hơn (Mưa Đỏ Original Soundtrack)",
+      "artist": "Nguyễn Hùng",
+      "album": "Còn Gì Đẹp Hơn (Mưa Đỏ Original Soundtrack)",
+      "duration": 193,
+      "audioUrl": "/uploads/tracks/d37a4ab6-d159-4242-afcc-21a9da7dd41c.mp3",
+      "genre": "V-Pop"
+    },
+    {
+      "title": "chẳng phải tình đầu sao đau đến thế",
+      "artist": "MIN",
+      "album": "NhacCuaTui.com",
+      "duration": 194,
+      "audioUrl": "/uploads/tracks/82011c3a-b4b7-4713-aedd-f1ce582f89f2.mp3",
+      "genre": "V-Pop"
+    },
+    {
+      "title": "Đớn Đau Vô Cùng",
+      "artist": "DatKaa",
+      "album": "NhacCuaTui.com",
+      "duration": 143,
+      "audioUrl": "/uploads/tracks/71abfd91-f580-47fe-9da8-c1e48a071a13.mp3",
+      "genre": "V-Pop"
+    },
+    {
+      "title": "Ngày Này Năm Ấy",
+      "artist": "Việt Anh",
+      "album": "NhacCuaTui.com",
+      "duration": 165,
+      "audioUrl": "/uploads/tracks/d35c7028-2ac2-493e-9606-186b3dfa20c1.mp3",
+      "genre": "V-Pop"
+    },
+    {
+      "title": "Thanh Tân Song Ca Thùy Chi",
+      "artist": "VƯƠNG BÌNH",
+      "album": "NhacCuaTui.com",
+      "duration": 182,
+      "audioUrl": "/uploads/tracks/5d3624e1-1d14-4416-b700-d95acbd7f254.mp3",
+      "genre": "V-Pop"
+    },
+    {
+      "title": "CHỜ ANH VỀ",
+      "artist": "ANH TRAI \"SAY HI\"",
+      "album": "NhacCuaTui.com",
+      "duration": 149,
+      "audioUrl": "/uploads/tracks/058f11d4-ba7d-4aba-933d-87d800014f9f.mp3",
+      "genre": "V-Pop"
+    },
+    {
+      "title": "Người Còn Thương Em Không",
+      "artist": "Tóc Tiên",
+      "album": "NhacCuaTui.com",
+      "duration": 153,
+      "audioUrl": "/uploads/tracks/f8c410dd-a7e2-49df-8287-34732aaa3e70.mp3",
+      "genre": "V-Pop"
+    },
+    {
+      "title": "hello em có khỏe không",
+      "artist": "Dfoxie37",
+      "album": "NhacCuaTui.com",
+      "duration": 210,
+      "audioUrl": "/uploads/tracks/9e4630f1-1cdd-47dd-8ea0-c376b9faa2e6.mp3",
+      "genre": "V-Pop"
+    },
+    {
+      "title": "Hẹn Lần Sau",
+      "artist": "MAYDAYs",
+      "album": "NhacCuaTui.com",
+      "duration": 152,
+      "audioUrl": "/uploads/tracks/cbb4e2e7-9e1c-448d-aa54-2312d7ff709f.mp3",
+      "genre": "V-Pop"
+    },
+    {
+      "title": "SỚM MUỘN THÌ",
+      "artist": "ANH TRAI \"SAY HI\"",
+      "album": "NhacCuaTui.com",
+      "duration": 218,
+      "audioUrl": "/uploads/tracks/d42c78f5-133c-4993-9062-c1acafd8d1f0.mp3",
+      "genre": "V-Pop"
+    },
+    {
+      "title": "Tuyển Bạn Gái",
+      "artist": "OgeNus",
+      "album": "NhacCuaTui.com",
+      "duration": 153,
+      "audioUrl": "/uploads/tracks/48e1a4d8-5550-4b18-a629-2460610232ca.mp3",
+      "genre": "V-Pop"
+    },
+    {
+      "title": "Ai Ngoài Anh",
+      "artist": "VSTRA",
+      "album": "NhacCuaTui.com",
+      "duration": 139,
+      "audioUrl": "/uploads/tracks/edb52d45-cd91-4614-8f66-f01b700a332a.mp3",
+      "genre": "V-Pop"
+    },
+    {
+      "title": "Đôi Mắt Kẻ Tình Si",
+      "artist": "GREY D",
+      "album": "NhacCuaTui.com",
+      "duration": 131,
+      "audioUrl": "/uploads/tracks/7fe4c48c-2b49-4b41-83b0-a0cf3f67d4be.mp3",
+      "genre": "V-Pop"
+    },
+    {
+      "title": "Kho Báu",
+      "artist": "(S)TRONG",
+      "album": "NhacCuaTui.com",
+      "duration": 151,
+      "audioUrl": "/uploads/tracks/b8c6f953-99f9-4fd8-975d-fb19b887b499.mp3",
+      "genre": "V-Pop"
+    },
+    {
+      "title": "Em (feat. SOOBIN)",
+      "artist": "Binz",
+      "album": "NhacCuaTui.com",
+      "duration": 203,
+      "audioUrl": "/uploads/tracks/b3271e66-e56b-4f67-b09a-177e93c2cbef.mp3",
+      "genre": "V-Pop"
+    }
+  ]
+}

@@ -1,0 +1,150 @@
+@using System.Text.Json
+@{
+    ViewData["Title"] = "Thư viện của bạn";
+    var activeTab = ViewBag.ActiveTab as string ?? "playlists";
+    var playlists = ViewBag.Playlists as IEnumerable<Melodify.Models.DTOs.PlaylistDto> ?? new List<Melodify.Models.DTOs.PlaylistDto>();
+    var likedTracks = ViewBag.LikedTracks as IEnumerable<Melodify.Models.DTOs.TrackDto> ?? new List<Melodify.Models.DTOs.TrackDto>();
+    var tracksJson = JsonSerializer.Serialize(likedTracks, new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
+}
+
+<div class="content-wrapper">
+    <div class="d-flex align-items-center justify-content-between mb-4">
+        <div class="d-flex gap-3">
+            <a href="/Library?tab=playlists" class="btn @(activeTab == "playlists" ? "btn-light text-dark" : "btn-outline-light text-white") rounded-pill px-4 fw-bold">Danh sách phát</a>
+            <a href="/Library?tab=liked" class="btn @(activeTab == "liked" ? "btn-light text-dark" : "btn-outline-light text-white") rounded-pill px-4 fw-bold">Bài đã thích</a>
+        </div>
+        
+        @if (activeTab == "playlists")
+        {
+            <button class="btn btn-success rounded-pill px-4 fw-bold text-dark" data-bs-toggle="modal" data-bs-target="#createPlaylistModal">
+                <i class="bi bi-plus-lg me-2"></i>Tạo playlist mới
+            </button>
+        }
+    </div>
+
+    @if (activeTab == "playlists")
+    {
+        @if (!playlists.Any())
+        {
+            <div class="text-center py-5">
+                <i class="bi bi-music-note-list text-secondary" style="font-size: 64px;"></i>
+                <h3 class="mt-3 fs-5 text-secondary">Chưa có danh sách phát nào</h3>
+                <button class="btn btn-outline-light rounded-pill px-4 mt-3" data-bs-toggle="modal" data-bs-target="#createPlaylistModal">Tạo danh sách phát đầu tiên</button>
+            </div>
+        }
+        else
+        {
+            <div class="card-grid">
+                @foreach (var playlist in playlists)
+                {
+                    <div class="music-card" onclick="navigateTo('/Playlist/Detail/@playlist.PlaylistId')">
+                        <div class="card-image-container d-flex align-items-center justify-content-center bg-gradient text-white" style="background: linear-gradient(135deg, #1e3c72, #2a5298); width: 100%; padding-top: 100%; position: relative;">
+                            <i class="bi bi-music-note-beamed" style="font-size: 64px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);"></i>
+                        </div>
+                        <div class="card-title mt-3">@playlist.Name</div>
+                        <div class="card-description">Danh sách phát cá nhân</div>
+                    </div>
+                }
+            </div>
+        }
+    }
+    else
+    {
+        @if (!likedTracks.Any())
+        {
+            <div class="text-center py-5">
+                <i class="bi bi-heartbreak text-secondary" style="font-size: 64px;"></i>
+                <h3 class="mt-3 fs-5 text-secondary">Bạn chưa thích bài hát nào</h3>
+                <a href="/Search" class="btn btn-outline-light rounded-pill px-4 mt-3">Khám phá âm nhạc</a>
+            </div>
+        }
+        else
+        {
+            <div class="d-flex align-items-center gap-4 mb-4">
+                <button class="btn-play-hero" onclick="playAllLiked()">
+                    <i class="bi bi-play-fill text-dark"></i>
+                </button>
+                <h2 class="fs-4 fw-bold m-0">Bài hát đã thích</h2>
+            </div>
+
+            <table class="track-table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Tiêu đề</th>
+                        <th>Album</th>
+                        <th></th>
+                        <th class="text-end"><i class="bi bi-clock"></i></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int i = 0; i < likedTracks.Count(); i++)
+                    {
+                        var track = likedTracks.ElementAt(i);
+                        <tr class="track-row" data-track-id="@track.TrackId" onclick="playLikedTrackAt(@i)">
+                            <td class="track-number">@(i + 1)</td>
+                            <td>
+                                <div class="track-title-container">
+                                    <img src="@track.CoverImage" onerror="this.src='https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=100&h=100&fit=crop'" class="track-cover-mini" alt="" />
+                                    <div class="track-meta">
+                                        <span class="track-title-cell">@track.Title</span>
+                                        <span class="track-artist-cell">@track.ArtistName</span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="track-genre-cell">@track.AlbumTitle</td>
+                            <td onclick="event.stopPropagation();">
+                                <div class="d-flex align-items-center gap-3 justify-content-end">
+                                    <button class="btn p-0 text-success btn-like-track liked" data-track-id="@track.TrackId" onclick="toggleLikeInLibrary(this, @track.TrackId)">
+                                        <i class="bi bi-heart-fill"></i>
+                                    </button>
+                                </div>
+                            </td>
+                            <td class="track-duration-cell">
+                                @{
+                                    var min = track.Duration / 60;
+                                    var sec = track.Duration % 60;
+                                    var secStr = sec < 10 ? "0" + sec : sec.ToString();
+                                }
+                                @min:@secStr
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    }
+</div>
+
+@section Scripts {
+    <script src="/js/playlist.js"></script>
+    <script>
+        var likedTracks = @Html.Raw(tracksJson);
+
+        function playLikedTrackAt(index) {
+            setPlaylist(likedTracks, index);
+        }
+
+        function playAllLiked() {
+            if (likedTracks.length > 0) {
+                setPlaylist(likedTracks, 0);
+            }
+        }
+
+        function toggleLikeInLibrary(btn, trackId) {
+            $.post('/Library/Unlike', { trackId }, function(data) {
+                if (data.success) {
+                    $(btn).closest('tr').fadeOut(300, function() {
+                        $(this).remove();
+                        if ($('.track-table tbody tr').length === 0) {
+                            location.reload();
+                        }
+                    });
+                    if (window.currentTrackId == trackId) {
+                        $('#player-like-btn').removeClass('liked').html('<i class="bi bi-heart"></i>');
+                    }
+                }
+            });
+        }
+    </script>
+}

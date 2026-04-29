@@ -1,0 +1,54 @@
+@model Melodify.Models.Entities.Album
+
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Thêm album mới";
+}
+
+<div class="mb-4 text-white">
+    <a href="/Admin/Albums" class="text-secondary hover-underline text-decoration-none">
+        <i class="bi bi-chevron-left me-2"></i>Quay lại danh sách
+    </a>
+    <h1 class="fw-bold fs-3 mt-3">Thêm album mới</h1>
+</div>
+
+<div class="card bg-dark text-white border-secondary p-4 rounded" style="background-color: var(--bg-card);">
+    <form asp-area="Admin" asp-controller="Albums" asp-action="Create" method="post" enctype="multipart/form-data">
+        @Html.AntiForgeryToken()
+        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+        <div class="row">
+            <div class="col-12 col-md-6 mb-3">
+                <label asp-for="Title" class="form-label fw-bold">Tiêu đề album *</label>
+                <input asp-for="Title" class="form-control bg-secondary text-white border-0" placeholder="Nhập tên album" required />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+
+            <div class="col-12 col-md-6 mb-3">
+                <label asp-for="ReleaseYear" class="form-label fw-bold">Năm phát hành *</label>
+                <input asp-for="ReleaseYear" type="number" class="form-control bg-secondary text-white border-0" placeholder="Ví dụ: 2025" required min="1900" max="2100" />
+                <span asp-validation-for="ReleaseYear" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-md-6 mb-3">
+                <label asp-for="ArtistId" class="form-label fw-bold">Nghệ sĩ sở hữu *</label>
+                <select asp-for="ArtistId" asp-items="ViewBag.Artists" class="form-select bg-secondary text-white border-0" required>
+                    <option value="">-- Chọn nghệ sĩ --</option>
+                </select>
+                <span asp-validation-for="ArtistId" class="text-danger"></span>
+            </div>
+
+            <div class="col-12 col-md-6 mb-4">
+                <label class="form-label fw-bold">Ảnh bìa album</label>
+                <input name="coverFile" type="file" class="form-control bg-secondary text-white border-0" accept=".jpg,.jpeg,.png,.webp" />
+            </div>
+        </div>
+
+        <div class="mt-4">
+            <button type="submit" class="btn btn-success rounded-pill px-5 py-2 fw-bold text-dark me-3">Thêm album</button>
+            <a href="/Admin/Albums" class="btn btn-outline-secondary rounded-pill px-5 py-2 fw-bold">Hủy</a>
+        </div>
+    </form>
+</div>

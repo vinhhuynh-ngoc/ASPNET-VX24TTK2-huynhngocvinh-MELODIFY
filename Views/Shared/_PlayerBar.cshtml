@@ -1,0 +1,51 @@
+<div class="sticky bottom-0 z-30 grid h-[72px] grid-cols-3 items-center gap-4 border-t border-border/40 bg-sidebar px-4">
+    <div class="flex min-w-0 items-center gap-3">
+        <img id="player-bar-cover" src="/uploads/covers/default.png" onerror="this.src='https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=100&h=100&fit=crop'" class="size-12 shrink-0 rounded-md object-cover" alt="" />
+        <div class="min-w-0">
+            <div id="player-bar-title" class="truncate text-sm font-semibold">Chưa phát bài nào</div>
+            <div id="player-bar-artist" class="truncate text-xs text-muted-foreground">Chọn bài hát từ danh sách</div>
+        </div>
+        <button id="player-like-btn" class="ml-2 shrink-0 transition text-lime">
+            <i class="bi bi-heart"></i>
+        </button>
+    </div>
+
+    <div class="flex flex-col items-center gap-1">
+        <div class="flex items-center gap-4">
+            <button id="shuffle-btn" class="text-muted-foreground transition hover:text-foreground">
+                <i class="bi bi-shuffle"></i>
+            </button>
+            <button id="prev-btn" class="text-foreground/80 transition hover:text-foreground">
+                <i class="bi bi-skip-start-fill fs-5"></i>
+            </button>
+            <button id="play-pause-btn" class="grid size-9 place-items-center rounded-full bg-lime text-lime-foreground transition hover:scale-105">
+                <i class="bi bi-play-fill fs-5"></i>
+            </button>
+            <button id="next-btn" class="text-foreground/80 transition hover:text-foreground">
+                <i class="bi bi-skip-end-fill fs-5"></i>
+            </button>
+            <button id="repeat-btn" class="text-muted-foreground transition hover:text-foreground">
+                <i class="bi bi-repeat"></i>
+            </button>
+        </div>
+        <div class="flex w-full max-w-md items-center gap-2 text-[10px] text-muted-foreground">
+            <span id="time-elapsed" class="tabular-nums">0:00</span>
+            <div class="group relative h-1 flex-1 rounded-full bg-white/10 progress-bar-wrapper">
+                <div id="progress-bar-fill-track" class="h-full w-[0%] rounded-full bg-foreground group-hover:bg-lime"></div>
+            </div>
+            <span id="time-duration" class="tabular-nums">0:00</span>
+        </div>
+    </div>
+
+    <div class="flex items-center justify-end gap-3 text-muted-foreground">
+        <button class="transition hover:text-foreground" onclick="navigateTo('/Library')">
+            <i class="bi bi-list-music fs-5"></i>
+        </button>
+        <i id="volume-icon" class="bi bi-volume-up-fill fs-5"></i>
+        <div class="volume-container flex items-center">
+            <div class="group relative h-1 w-24 rounded-full bg-white/10 progress-bar-wrapper">
+                <div id="volume-bar-fill" class="h-full w-[50%] rounded-full bg-foreground group-hover:bg-lime"></div>
+            </div>
+        </div>
+    </div>
+</div>

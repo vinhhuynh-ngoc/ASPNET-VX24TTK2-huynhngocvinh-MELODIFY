@@ -1,0 +1,39 @@
+@model Melodify.Models.DTOs.LoginDto
+
+@{
+    Layout = "_LoginLayout";
+    ViewData["Title"] = "Đăng nhập";
+}
+
+<div class="auth-card">
+    <div class="d-flex justify-content-center mb-4">
+        <span class="fs-2 fw-black text-success">Melodify.</span>
+    </div>
+    <h1 class="auth-title">Đăng nhập</h1>
+    <form asp-action="Login" method="post">
+        @Html.AntiForgeryToken()
+        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+        
+        <div class="form-group">
+            <label asp-for="Email" class="form-label">Email</label>
+            <input asp-for="Email" class="form-control" placeholder="Email" required />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Password" class="form-label">Mật khẩu</label>
+            <input asp-for="Password" type="password" class="form-control" placeholder="Mật khẩu" required />
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+
+        <div class="form-group form-check mb-3">
+            <input asp-for="RememberMe" class="form-check-input bg-dark border-secondary" />
+            <label asp-for="RememberMe" class="form-check-label text-secondary fs-6 ms-2">Ghi nhớ đăng nhập</label>
+        </div>
+
+        <button type="submit" class="btn-primary-auth">Đăng nhập</button>
+    </form>
+    <div class="auth-footer">
+        Bạn chưa có tài khoản? <a href="/Account/Register">Đăng ký ngay</a>
+    </div>
+</div>

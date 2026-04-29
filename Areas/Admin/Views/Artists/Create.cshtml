@@ -1,0 +1,42 @@
+@model Melodify.Models.Entities.Artist
+
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Thêm nghệ sĩ mới";
+}
+
+<div class="mb-4 text-white">
+    <a href="/Admin/Artists" class="text-secondary hover-underline text-decoration-none">
+        <i class="bi bi-chevron-left me-2"></i>Quay lại danh sách
+    </a>
+    <h1 class="fw-bold fs-3 mt-3">Thêm nghệ sĩ mới</h1>
+</div>
+
+<div class="card bg-dark text-white border-secondary p-4 rounded" style="background-color: var(--bg-card);">
+    <form asp-area="Admin" asp-controller="Artists" asp-action="Create" method="post" enctype="multipart/form-data">
+        @Html.AntiForgeryToken()
+        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+        <div class="mb-3">
+            <label asp-for="Name" class="form-label fw-bold">Tên nghệ sĩ *</label>
+            <input asp-for="Name" class="form-control bg-secondary text-white border-0" placeholder="Nhập tên nghệ sĩ" required />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Bio" class="form-label fw-bold">Tiểu sử / Giới thiệu</label>
+            <textarea asp-for="Bio" rows="4" class="form-control bg-secondary text-white border-0" placeholder="Nhập tiểu sử nghệ sĩ"></textarea>
+            <span asp-validation-for="Bio" class="text-danger"></span>
+        </div>
+
+        <div class="mb-4 col-md-6">
+            <label class="form-label fw-bold">Ảnh đại diện nghệ sĩ</label>
+            <input name="imageFile" type="file" class="form-control bg-secondary text-white border-0" accept=".jpg,.jpeg,.png,.webp" />
+        </div>
+
+        <div class="mt-4">
+            <button type="submit" class="btn btn-success rounded-pill px-5 py-2 fw-bold text-dark me-3">Thêm nghệ sĩ</button>
+            <a href="/Admin/Artists" class="btn btn-outline-secondary rounded-pill px-5 py-2 fw-bold">Hủy</a>
+        </div>
+    </form>
+</div>

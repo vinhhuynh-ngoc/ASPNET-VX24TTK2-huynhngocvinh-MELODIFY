@@ -1,0 +1,92 @@
+@model Melodify.Models.DTOs.UploadTrackDto
+
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Tải lên bài hát";
+}
+
+<div class="mb-4 text-white">
+    <a href="/Admin/Tracks" class="text-secondary hover-underline text-decoration-none">
+        <i class="bi bi-chevron-left me-2"></i>Quay lại danh sách
+    </a>
+    <h1 class="fw-bold fs-3 mt-3">Tải lên bài hát mới</h1>
+</div>
+
+<div class="card bg-dark text-white border-secondary p-4 rounded" style="background-color: var(--bg-card);">
+    <form asp-area="Admin" asp-controller="Tracks" asp-action="Upload" method="post" enctype="multipart/form-data" id="upload-form">
+        @Html.AntiForgeryToken()
+        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+        <div class="row">
+            <div class="col-12 col-md-6 mb-3">
+                <label asp-for="Title" class="form-label fw-bold">Tiêu đề bài hát *</label>
+                <input asp-for="Title" class="form-control bg-secondary text-white border-0" placeholder="Nhập tên bài hát" required />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+
+            <div class="col-12 col-md-6 mb-3">
+                <label asp-for="Genre" class="form-label fw-bold">Thể loại</label>
+                <input asp-for="Genre" class="form-control bg-secondary text-white border-0" placeholder="Ví dụ: Pop, Rap, Indie, Ballad" />
+                <span asp-validation-for="Genre" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-md-6 mb-3">
+                <label asp-for="ArtistId" class="form-label fw-bold">Nghệ sĩ trình bày *</label>
+                <select asp-for="ArtistId" asp-items="ViewBag.Artists" class="form-select bg-secondary text-white border-0" required>
+                    <option value="">-- Chọn nghệ sĩ --</option>
+                </select>
+                <span asp-validation-for="ArtistId" class="text-danger"></span>
+            </div>
+
+            <div class="col-12 col-md-6 mb-3">
+                <label asp-for="AlbumId" class="form-label fw-bold">Album (Không bắt buộc)</label>
+                <select asp-for="AlbumId" asp-items="ViewBag.Albums" class="form-select bg-secondary text-white border-0">
+                    <option value="">-- Không có album --</option>
+                </select>
+                <span asp-validation-for="AlbumId" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col-12 col-md-6 mb-4">
+                <label asp-for="AudioFile" class="form-label fw-bold">Tệp âm thanh (.mp3) *</label>
+                <input asp-for="AudioFile" type="file" class="form-control bg-secondary text-white border-0" accept=".mp3" required />
+                <span asp-validation-for="AudioFile" class="text-danger"></span>
+                <div class="progress mt-3 d-none" id="progress-container">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" id="upload-progress" role="progressbar" style="width: 0%;">0%</div>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6 mb-4">
+                <label asp-for="CoverFile" class="form-label fw-bold">Ảnh bìa bài hát (Không bắt buộc)</label>
+                <input asp-for="CoverFile" type="file" class="form-control bg-secondary text-white border-0" accept=".jpg,.jpeg,.png,.webp" />
+                <span asp-validation-for="CoverFile" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="mt-4">
+            <button type="submit" class="btn btn-success rounded-pill px-5 py-2 fw-bold text-dark me-3">Lưu bài hát</button>
+            <a href="/Admin/Tracks" class="btn btn-outline-secondary rounded-pill px-5 py-2 fw-bold">Hủy</a>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <script>
+        $('#upload-form').on('submit', function() {
+            if (this.checkValidity()) {
+                $('#progress-container').removeClass('d-none');
+                let progress = 0;
+                const interval = setInterval(function() {
+                    progress += 10;
+                    if (progress >= 90) {
+                        clearInterval(interval);
+                    }
+                    $('#upload-progress').css('width', progress + '%').text(progress + '%');
+                }, 200);
+            }
+        });
+    </script>
+}
