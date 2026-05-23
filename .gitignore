@@ -32,7 +32,8 @@ npm-debug.log
 yarn-error.log
 
 # Client libraries managed by libman / package managers (reinstallable)
-wwwroot/lib/
+src/wwwroot/lib/
+**/wwwroot/lib/
 
 # Logs, test results, temp
 *.log
@@ -49,12 +50,12 @@ Thumbs.db
 *.swp
 
 # Don't ignore these (keep DB links, seed data, and uploaded music files)
-!appsettings.json
-!appsettings.Development.json
-!appsettings.*.json
-!wwwroot/uploads/
-!wwwroot/tracks.json
-!Data/SeedData.cs
+!src/appsettings.json
+!src/appsettings.Development.json
+!src/appsettings.*.json
+!src/wwwroot/uploads/
+!src/wwwroot/tracks.json
+!src/Data/SeedData.cs
 
 # Note: If you use other local config files (e.g. .env), do not add them above
 # unless you explicitly want them ignored. This .gitignore focuses on
