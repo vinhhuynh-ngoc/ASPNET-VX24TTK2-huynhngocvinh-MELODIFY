@@ -5,35 +5,57 @@
     ViewData["Title"] = "Đăng nhập";
 }
 
-<div class="auth-card">
-    <div class="d-flex justify-content-center mb-4">
-        <span class="fs-2 fw-black text-success">Melodify.</span>
-    </div>
-    <h1 class="auth-title">Đăng nhập</h1>
-    <form asp-action="Login" method="post">
-        @Html.AntiForgeryToken()
-        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
-        
-        <div class="form-group">
-            <label asp-for="Email" class="form-label">Email</label>
-            <input asp-for="Email" class="form-control" placeholder="Email" required />
-            <span asp-validation-for="Email" class="text-danger"></span>
+<div class="grid min-h-screen place-items-center bg-background p-6">
+    <div class="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top,oklch(0.92_0.18_125/0.15),transparent_60%)]"></div>
+    <div class="w-full max-w-[400px] space-y-6 rounded-3xl border border-border/60 bg-surface p-8 shadow-2xl">
+        <div class="text-center">
+            <div class="mx-auto grid size-12 place-items-center rounded-2xl bg-lime text-lime-foreground font-bold">M</div>
+            <h1 class="mt-4 font-display text-2xl font-extrabold">Đăng nhập vào Melodify</h1>
         </div>
+        <form asp-action="Login" method="post" class="space-y-4">
+            @Html.AntiForgeryToken()
+            <div asp-validation-summary="ModelOnly" class="text-red-500 text-sm mb-3"></div>
+            
+            <label class="block">
+                <span class="text-xs font-semibold uppercase tracking-widest text-muted-foreground">Email</span>
+                <input asp-for="Email" required class="mt-1 h-11 w-full rounded-xl border border-border bg-background px-3 text-sm focus:border-lime focus:outline-none focus:ring-1 focus:ring-lime" />
+                <span asp-validation-for="Email" class="text-red-500 text-xs mt-1 block"></span>
+            </label>
+            
+            <label class="block">
+                <span class="text-xs font-semibold uppercase tracking-widest text-muted-foreground">Mật khẩu</span>
+                <div class="relative mt-1">
+                    <input asp-for="Password" type="password" required class="h-11 w-full rounded-xl border border-border bg-background px-3 pr-10 text-sm focus:border-lime focus:outline-none focus:ring-1 focus:ring-lime" id="passwordInput" />
+                    <button type="button" onclick="togglePassword()" class="absolute right-2 top-1/2 -translate-y-1/2 p-2 text-muted-foreground hover:text-foreground">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eye size-4" aria-hidden="true"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                    </button>
+                </div>
+                <span asp-validation-for="Password" class="text-red-500 text-xs mt-1 block"></span>
+            </label>
 
-        <div class="form-group">
-            <label asp-for="Password" class="form-label">Mật khẩu</label>
-            <input asp-for="Password" type="password" class="form-control" placeholder="Mật khẩu" required />
-            <span asp-validation-for="Password" class="text-danger"></span>
+            <label class="flex items-start gap-2 text-xs text-muted-foreground">
+                <input asp-for="RememberMe" class="mt-0.5 accent-lime" type="checkbox">
+                <span>Ghi nhớ đăng nhập</span>
+            </label>
+
+            <button type="submit" class="flex h-11 w-full items-center justify-center rounded-full bg-lime text-sm font-bold text-lime-foreground transition hover:scale-[1.01] disabled:opacity-60">Đăng nhập</button>
+        </form>
+        <div class="space-y-1 text-center text-sm">
+            <div>Chưa có tài khoản? <a href="/Account/Register" class="font-semibold text-lime hover:underline">Đăng ký</a></div>
+            <a class="text-muted-foreground hover:text-foreground active" href="#">Quên mật khẩu?</a>
         </div>
-
-        <div class="form-group form-check mb-3">
-            <input asp-for="RememberMe" class="form-check-input bg-dark border-secondary" />
-            <label asp-for="RememberMe" class="form-check-label text-secondary fs-6 ms-2">Ghi nhớ đăng nhập</label>
-        </div>
-
-        <button type="submit" class="btn-primary-auth">Đăng nhập</button>
-    </form>
-    <div class="auth-footer">
-        Bạn chưa có tài khoản? <a href="/Account/Register">Đăng ký ngay</a>
     </div>
 </div>
+
+@section Scripts {
+    <script>
+        function togglePassword() {
+            var x = document.getElementById("passwordInput");
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
+            }
+        }
+    </script>
+}

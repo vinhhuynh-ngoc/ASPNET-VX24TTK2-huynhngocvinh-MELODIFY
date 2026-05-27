@@ -60,3 +60,4 @@ Thumbs.db
 # Note: If you use other local config files (e.g. .env), do not add them above
 # unless you explicitly want them ignored. This .gitignore focuses on
 # rebuildable/reinstallable artifacts only.
+docs/
