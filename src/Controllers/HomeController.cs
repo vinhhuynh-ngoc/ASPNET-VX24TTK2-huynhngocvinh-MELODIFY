@@ -41,21 +41,6 @@ namespace Melodify.Controllers
             var user = await _userManager.FindByIdAsync(userId);
             var fullName = !string.IsNullOrWhiteSpace(user?.FullName) ? user.FullName : (user?.Email ?? "Người dùng");
 
-            var hour = DateTime.Now.Hour;
-            string greeting;
-            if (hour >= 5 && hour < 12)
-            {
-                greeting = "Chào buổi sáng";
-            }
-            else if (hour >= 12 && hour < 18)
-            {
-                greeting = "Chào buổi chiều";
-            }
-            else
-            {
-                greeting = "Chào buổi tối";
-            }
-
             // Using the optimized DB-level limited queries
             var recentAlbums = (await _albumService.GetRecentAlbumsAsync(6)).ToList();
             var featuredTracks = (await _trackService.GetFeaturedTracksAsync(5, userId)).ToList();
@@ -64,7 +49,7 @@ namespace Melodify.Controllers
 
             var viewModel = new HomeViewModel
             {
-                Greeting = $"{greeting}, {fullName}",
+                Greeting = $"Xin chào, <span class=\"text-lime\">{fullName}</span>",
                 RecentAlbums = recentAlbums,
                 FeaturedTracks = featuredTracks,
                 SuggestedArtists = suggestedArtists,

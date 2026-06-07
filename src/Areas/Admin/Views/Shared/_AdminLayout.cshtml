@@ -83,6 +83,18 @@
         </aside>
         
         <main class="flex-1 overflow-y-auto">
+            @using Microsoft.AspNetCore.Identity
+            @using Melodify.Models.Entities
+            @inject UserManager<User> UserManager
+            @{
+                var user = await UserManager.GetUserAsync(User);
+                var fullName = !string.IsNullOrWhiteSpace(user?.FullName) ? user.FullName : (user?.Email ?? "Admin");
+            }
+            <div class="sticky top-0 z-10 flex items-center justify-end border-b border-border/40 bg-surface/80 px-6 py-4 backdrop-blur-md md:px-10">
+                <div class="font-display text-sm font-bold">
+                    Xin chào, <span class="text-lime">@fullName</span>
+                </div>
+            </div>
             <div class="space-y-6 p-6 md:p-10">
                 @if (TempData["SuccessMessage"] != null)
                 {
