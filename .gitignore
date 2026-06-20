@@ -1,0 +1,61 @@
+# .gitignore for MELODIFY
+# Ignore build artifacts and reinstallable packages; keep env, seeds, uploads
+
+# Build outputs
+bin/
+obj/
+**/bin/
+**/obj/
+
+# Visual Studio / Rider / VS Code
+.vs/
+.vscode/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+.idea/
+
+# NuGet
+*.nupkg
+packages/
+.nuget/
+project.lock.json
+project.fragment.lock.json
+
+# Publish output
+publish/
+
+# Node / frontend
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Client libraries managed by libman / package managers (reinstallable)
+wwwroot/lib/
+
+# Logs, test results, temp
+*.log
+logs/
+TestResults/
+*.cache
+*.tmp
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor swap / temp
+*.swp
+
+# Don't ignore these (keep DB links, seed data, and uploaded music files)
+!appsettings.json
+!appsettings.Development.json
+!appsettings.*.json
+!wwwroot/uploads/
+!wwwroot/tracks.json
+!Data/SeedData.cs
+
+# Note: If you use other local config files (e.g. .env), do not add them above
+# unless you explicitly want them ignored. This .gitignore focuses on
+# rebuildable/reinstallable artifacts only.
