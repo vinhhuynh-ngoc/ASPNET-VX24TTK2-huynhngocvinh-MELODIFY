@@ -18,7 +18,14 @@ namespace Melodify.Mappings
                 .ForMember(dest => dest.IsFollowed, opt => opt.Ignore());
 
             CreateMap<Album, AlbumDto>()
-                .ForMember(dest => dest.ArtistName, opt => opt.MapFrom(src => src.Artist != null ? src.Artist.Name : string.Empty))
+                .ForMember(dest => dest.Artists, opt => opt.MapFrom(src =>
+                    src.Tracks != null && src.Tracks.Any(t => t.Artist != null)
+                        ? src.Tracks.Select(t => t.Artist).Where(a => a != null).GroupBy(a => a.ArtistId).Select(g => g.First()).ToList()
+                        : (src.Artist != null ? new List<Artist> { src.Artist } : new List<Artist>())))
+                .ForMember(dest => dest.ArtistName, opt => opt.MapFrom(src =>
+                    src.Tracks != null && src.Tracks.Any(t => t.Artist != null)
+                        ? string.Join(", ", src.Tracks.Select(t => t.Artist.Name).Distinct())
+                        : (src.Artist != null ? src.Artist.Name : string.Empty)))
                 .ForMember(dest => dest.Tracks, opt => opt.MapFrom(src => src.Tracks));
 
             CreateMap<Playlist, PlaylistDto>()

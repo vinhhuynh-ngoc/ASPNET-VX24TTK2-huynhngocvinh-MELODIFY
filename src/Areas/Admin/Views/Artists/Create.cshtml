@@ -5,38 +5,75 @@
     ViewData["Title"] = "Thêm nghệ sĩ mới";
 }
 
-<div class="mb-4 text-white">
-    <a href="/Admin/Artists" class="text-secondary hover-underline text-decoration-none">
-        <i class="bi bi-chevron-left me-2"></i>Quay lại danh sách
-    </a>
-    <h1 class="fw-bold fs-3 mt-3">Thêm nghệ sĩ mới</h1>
-</div>
+<nav class="flex items-center gap-1 text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-6">
+    <a class="hover:text-foreground" href="/Admin">Admin</a>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-3"><path d="m9 18 6-6-6-6"></path></svg>
+    <a class="hover:text-foreground" href="/Admin/Artists">Nghệ sĩ</a>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-3"><path d="m9 18 6-6-6-6"></path></svg>
+    <span class="text-foreground">Thêm mới</span>
+</nav>
+<h1 class="font-display text-3xl font-extrabold mb-6">Thêm nghệ sĩ mới</h1>
 
-<div class="card bg-dark text-white border-secondary p-4 rounded" style="background-color: var(--bg-card);">
-    <form asp-area="Admin" asp-controller="Artists" asp-action="Create" method="post" enctype="multipart/form-data">
-        @Html.AntiForgeryToken()
-        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+<form asp-area="Admin" asp-controller="Artists" asp-action="Create" method="post" enctype="multipart/form-data" class="grid gap-6 lg:grid-cols-[2fr_1fr]">
+    @Html.AntiForgeryToken()
 
-        <div class="mb-3">
-            <label asp-for="Name" class="form-label fw-bold">Tên nghệ sĩ *</label>
-            <input asp-for="Name" class="form-control bg-secondary text-white border-0" placeholder="Nhập tên nghệ sĩ" required />
-            <span asp-validation-for="Name" class="text-danger"></span>
+    <div class="space-y-6">
+        <div asp-validation-summary="ModelOnly" class="text-red-500 text-sm"></div>
+
+        <label class="block">
+            <span class="mb-1 block text-xs font-semibold uppercase tracking-widest text-muted-foreground">Tên nghệ sĩ *</span>
+            <input asp-for="Name" required class="h-11 w-full rounded-xl border border-border bg-background px-3 text-sm focus:border-lime focus:outline-none">
+            <span asp-validation-for="Name" class="text-red-500 text-xs mt-1 block"></span>
+        </label>
+
+        <label class="block">
+            <span class="mb-1 block text-xs font-semibold uppercase tracking-widest text-muted-foreground">Tiểu sử / Giới thiệu</span>
+            <textarea asp-for="Bio" rows="5" class="w-full rounded-xl border border-border bg-background px-3 py-2.5 text-sm focus:border-lime focus:outline-none resize-none"></textarea>
+            <span asp-validation-for="Bio" class="text-red-500 text-xs mt-1 block"></span>
+        </label>
+
+        <div class="flex gap-3 pt-2">
+            <button type="submit" class="rounded-full bg-lime px-5 py-2.5 text-sm font-bold text-lime-foreground">Thêm nghệ sĩ</button>
+            <a class="rounded-full border border-border px-5 py-2.5 text-sm font-semibold flex items-center justify-center text-foreground hover:bg-border/50" href="/Admin/Artists">Hủy</a>
         </div>
+    </div>
 
-        <div class="mb-3">
-            <label asp-for="Bio" class="form-label fw-bold">Tiểu sử / Giới thiệu</label>
-            <textarea asp-for="Bio" rows="4" class="form-control bg-secondary text-white border-0" placeholder="Nhập tiểu sử nghệ sĩ"></textarea>
-            <span asp-validation-for="Bio" class="text-danger"></span>
-        </div>
+    <div>
+        <label class="block">
+            <span class="mb-1 block text-xs font-semibold uppercase tracking-widest text-muted-foreground">Ảnh đại diện</span>
+            <label class="grid h-[200px] w-[200px] cursor-pointer place-items-center overflow-hidden rounded-xl border-2 border-dashed border-border bg-surface hover:border-lime relative" id="image-preview-container">
+                <input name="imageFile" accept=".jpg,.jpeg,.png,.webp" class="hidden" type="file" id="image-upload">
+                <div class="text-center text-muted-foreground" id="image-placeholder">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto size-8"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"></rect><circle cx="9" cy="9" r="2"></circle><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"></path></svg>
+                    <p class="mt-2 text-xs">200×200</p>
+                </div>
+                <img id="image-preview" class="absolute inset-0 w-full h-full object-cover hidden rounded-xl" />
+            </label>
+        </label>
+    </div>
+</form>
 
-        <div class="mb-4 col-md-6">
-            <label class="form-label fw-bold">Ảnh đại diện nghệ sĩ</label>
-            <input name="imageFile" type="file" class="form-control bg-secondary text-white border-0" accept=".jpg,.jpeg,.png,.webp" />
-        </div>
+@section Scripts {
+    <script>
+        const imageUpload = document.getElementById('image-upload');
+        const imagePreview = document.getElementById('image-preview');
+        const imagePlaceholder = document.getElementById('image-placeholder');
 
-        <div class="mt-4">
-            <button type="submit" class="btn btn-success rounded-pill px-5 py-2 fw-bold text-dark me-3">Thêm nghệ sĩ</button>
-            <a href="/Admin/Artists" class="btn btn-outline-secondary rounded-pill px-5 py-2 fw-bold">Hủy</a>
-        </div>
-    </form>
-</div>
+        if (imageUpload) {
+            imageUpload.addEventListener('change', function() {
+                if (this.files && this.files[0]) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        imagePreview.src = e.target.result;
+                        imagePreview.classList.remove('hidden');
+                        imagePlaceholder.classList.add('hidden');
+                    }
+                    reader.readAsDataURL(this.files[0]);
+                } else {
+                    imagePreview.classList.add('hidden');
+                    imagePlaceholder.classList.remove('hidden');
+                }
+            });
+        }
+    </script>
+}

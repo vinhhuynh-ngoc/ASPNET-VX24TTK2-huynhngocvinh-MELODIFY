@@ -3,52 +3,141 @@
 @{
     Layout = "_AdminLayout";
     ViewData["Title"] = "Thêm album mới";
+    var allTracks = ViewBag.AllTracks as IEnumerable<Melodify.Models.DTOs.TrackDto> ?? Enumerable.Empty<Melodify.Models.DTOs.TrackDto>();
 }
 
-<div class="mb-4 text-white">
-    <a href="/Admin/Albums" class="text-secondary hover-underline text-decoration-none">
-        <i class="bi bi-chevron-left me-2"></i>Quay lại danh sách
-    </a>
-    <h1 class="fw-bold fs-3 mt-3">Thêm album mới</h1>
-</div>
+<nav class="flex items-center gap-1 text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-6">
+    <a class="hover:text-foreground" href="/Admin">Admin</a>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-3"><path d="m9 18 6-6-6-6"></path></svg>
+    <a class="hover:text-foreground" href="/Admin/Albums">Album</a>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-3"><path d="m9 18 6-6-6-6"></path></svg>
+    <span class="text-foreground">Thêm mới</span>
+</nav>
+<h1 class="font-display text-3xl font-extrabold mb-6">Thêm album mới</h1>
 
-<div class="card bg-dark text-white border-secondary p-4 rounded" style="background-color: var(--bg-card);">
-    <form asp-area="Admin" asp-controller="Albums" asp-action="Create" method="post" enctype="multipart/form-data">
-        @Html.AntiForgeryToken()
-        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+<form asp-area="Admin" asp-controller="Albums" asp-action="Create" method="post" enctype="multipart/form-data" class="grid gap-6 lg:grid-cols-[2fr_1fr]">
+    @Html.AntiForgeryToken()
 
-        <div class="row">
-            <div class="col-12 col-md-6 mb-3">
-                <label asp-for="Title" class="form-label fw-bold">Tiêu đề album *</label>
-                <input asp-for="Title" class="form-control bg-secondary text-white border-0" placeholder="Nhập tên album" required />
-                <span asp-validation-for="Title" class="text-danger"></span>
-            </div>
+    <div class="space-y-6">
+        <div asp-validation-summary="ModelOnly" class="text-red-500 text-sm"></div>
 
-            <div class="col-12 col-md-6 mb-3">
-                <label asp-for="ReleaseYear" class="form-label fw-bold">Năm phát hành *</label>
-                <input asp-for="ReleaseYear" type="number" class="form-control bg-secondary text-white border-0" placeholder="Ví dụ: 2025" required min="1900" max="2100" />
-                <span asp-validation-for="ReleaseYear" class="text-danger"></span>
+        <label class="block">
+            <span class="mb-1 block text-xs font-semibold uppercase tracking-widest text-muted-foreground">Tiêu đề album *</span>
+            <input asp-for="Title" required class="h-11 w-full rounded-xl border border-border bg-background px-3 text-sm focus:border-lime focus:outline-none">
+            <span asp-validation-for="Title" class="text-red-500 text-xs mt-1 block"></span>
+        </label>
+
+        <div class="grid gap-4 md:grid-cols-2">
+            <label class="block">
+                <span class="mb-1 block text-xs font-semibold uppercase tracking-widest text-muted-foreground">Năm phát hành *</span>
+                <input asp-for="ReleaseYear" type="number" required min="1900" max="2100" class="h-11 w-full rounded-xl border border-border bg-background px-3 text-sm focus:border-lime focus:outline-none">
+                <span asp-validation-for="ReleaseYear" class="text-red-500 text-xs mt-1 block"></span>
+            </label>
+        </div>
+
+        <div class="block">
+            <span class="mb-2 block text-xs font-semibold uppercase tracking-widest text-muted-foreground">Chọn bài hát cho album</span>
+            <div class="rounded-2xl border border-border bg-surface overflow-hidden">
+                <div class="p-3 border-b border-border">
+                    <input type="text" id="track-search" placeholder="Tìm kiếm bài hát..." class="h-9 w-full rounded-lg border border-border bg-background px-3 text-sm focus:border-lime focus:outline-none">
+                </div>
+                <div class="max-h-[280px] overflow-y-auto" id="track-list">
+                    @foreach (var track in allTracks)
+                    {
+                        <label class="track-item flex items-center gap-3 px-4 py-2.5 cursor-pointer transition hover:bg-white/5" data-track-name="@track.Title.ToLower()">
+                            <input type="checkbox" name="SelectedTrackIds" value="@track.TrackId" class="size-4 rounded border-border accent-lime shrink-0">
+                            <img src="@track.CoverImage" alt="" class="size-8 rounded object-cover shrink-0" onerror="this.src='/uploads/covers/default.png'">
+                            <div class="min-w-0 flex-1">
+                                <div class="text-sm font-semibold truncate">@track.Title</div>
+                                <div class="text-xs text-muted-foreground truncate">@track.ArtistName</div>
+                            </div>
+                            <span class="text-xs text-muted-foreground tabular-nums shrink-0">
+                                @{
+                                    var m = track.Duration / 60;
+                                    var s = track.Duration % 60;
+                                }
+                                @m:@(s < 10 ? "0" + s : s.ToString())
+                            </span>
+                        </label>
+                    }
+                    <div class="px-4 py-6 text-center text-sm text-muted-foreground hidden" id="no-track-results">
+                        Không tìm thấy bài hát nào
+                    </div>
+                </div>
+                <div class="px-4 py-2 border-t border-border text-xs text-muted-foreground" id="track-count">
+                    Đã chọn <span class="text-lime font-semibold" id="selected-count">0</span> bài hát
+                </div>
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-12 col-md-6 mb-3">
-                <label asp-for="ArtistId" class="form-label fw-bold">Nghệ sĩ sở hữu *</label>
-                <select asp-for="ArtistId" asp-items="ViewBag.Artists" class="form-select bg-secondary text-white border-0" required>
-                    <option value="">-- Chọn nghệ sĩ --</option>
-                </select>
-                <span asp-validation-for="ArtistId" class="text-danger"></span>
-            </div>
-
-            <div class="col-12 col-md-6 mb-4">
-                <label class="form-label fw-bold">Ảnh bìa album</label>
-                <input name="coverFile" type="file" class="form-control bg-secondary text-white border-0" accept=".jpg,.jpeg,.png,.webp" />
-            </div>
+        <div class="flex gap-3 pt-2">
+            <button type="submit" class="rounded-full bg-lime px-5 py-2.5 text-sm font-bold text-lime-foreground">Thêm album</button>
+            <a class="rounded-full border border-border px-5 py-2.5 text-sm font-semibold flex items-center justify-center text-foreground hover:bg-border/50" href="/Admin/Albums">Hủy</a>
         </div>
+    </div>
 
-        <div class="mt-4">
-            <button type="submit" class="btn btn-success rounded-pill px-5 py-2 fw-bold text-dark me-3">Thêm album</button>
-            <a href="/Admin/Albums" class="btn btn-outline-secondary rounded-pill px-5 py-2 fw-bold">Hủy</a>
-        </div>
-    </form>
-</div>
+    <div>
+        <label class="block">
+            <span class="mb-1 block text-xs font-semibold uppercase tracking-widest text-muted-foreground">Ảnh bìa album</span>
+            <label class="grid h-[200px] w-[200px] cursor-pointer place-items-center overflow-hidden rounded-xl border-2 border-dashed border-border bg-surface hover:border-lime relative" id="cover-preview-container">
+                <input name="coverFile" accept=".jpg,.jpeg,.png,.webp" class="hidden" type="file" id="cover-upload">
+                <div class="text-center text-muted-foreground" id="cover-placeholder">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto size-8"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"></rect><circle cx="9" cy="9" r="2"></circle><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"></path></svg>
+                    <p class="mt-2 text-xs">200×200</p>
+                </div>
+                <img id="cover-preview" class="absolute inset-0 w-full h-full object-cover hidden rounded-xl" />
+            </label>
+        </label>
+    </div>
+</form>
+
+@section Scripts {
+    <script>
+        const coverUpload = document.getElementById('cover-upload');
+        const coverPreview = document.getElementById('cover-preview');
+        const coverPlaceholder = document.getElementById('cover-placeholder');
+
+        if (coverUpload) {
+            coverUpload.addEventListener('change', function() {
+                if (this.files && this.files[0]) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        coverPreview.src = e.target.result;
+                        coverPreview.classList.remove('hidden');
+                        coverPlaceholder.classList.add('hidden');
+                    }
+                    reader.readAsDataURL(this.files[0]);
+                } else {
+                    coverPreview.classList.add('hidden');
+                    coverPlaceholder.classList.remove('hidden');
+                }
+            });
+        }
+
+        const trackSearch = document.getElementById('track-search');
+        const trackItems = document.querySelectorAll('.track-item');
+        const noResults = document.getElementById('no-track-results');
+        const selectedCountEl = document.getElementById('selected-count');
+
+        trackSearch.addEventListener('input', function() {
+            const query = this.value.toLowerCase().trim();
+            let visibleCount = 0;
+            trackItems.forEach(function(item) {
+                const name = item.getAttribute('data-track-name');
+                const match = name.includes(query);
+                item.style.display = match ? '' : 'none';
+                if (match) visibleCount++;
+            });
+            noResults.classList.toggle('hidden', visibleCount > 0);
+        });
+
+        function updateSelectedCount() {
+            const checked = document.querySelectorAll('input[name="SelectedTrackIds"]:checked');
+            selectedCountEl.textContent = checked.length;
+        }
+
+        document.querySelectorAll('input[name="SelectedTrackIds"]').forEach(function(cb) {
+            cb.addEventListener('change', updateSelectedCount);
+        });
+    </script>
+}

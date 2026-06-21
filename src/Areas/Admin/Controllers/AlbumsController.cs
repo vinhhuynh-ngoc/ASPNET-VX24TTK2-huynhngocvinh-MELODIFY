@@ -2,10 +2,13 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Melodify.Data;
 using Melodify.Models.Entities;
 using Melodify.Services;
 
@@ -17,13 +20,22 @@ namespace Melodify.Areas.Admin.Controllers
     {
         private readonly IAlbumService _albumService;
         private readonly IArtistService _artistService;
+        private readonly ITrackService _trackService;
         private readonly IFileService _fileService;
+        private readonly AppDbContext _context;
 
-        public AlbumsController(IAlbumService albumService, IArtistService artistService, IFileService fileService)
+        public AlbumsController(
+            IAlbumService albumService,
+            IArtistService artistService,
+            ITrackService trackService,
+            IFileService fileService,
+            AppDbContext context)
         {
             _albumService = albumService;
             _artistService = artistService;
+            _trackService = trackService;
             _fileService = fileService;
+            _context = context;
         }
 
         [HttpGet]
@@ -38,14 +50,14 @@ namespace Melodify.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> Create()
         {
-            var artists = await _artistService.GetAllArtistsAsync(null);
-            ViewBag.Artists = new SelectList(artists, "ArtistId", "Name");
+            var allTracks = await _trackService.GetAllTracksAsync("");
+            ViewBag.AllTracks = allTracks;
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Album album, IFormFile? coverFile)
+        public async Task<IActionResult> Create(Album album, IFormFile? coverFile, List<int>? SelectedTrackIds)
         {
             if (ModelState.IsValid)
             {
@@ -58,13 +70,37 @@ namespace Melodify.Areas.Admin.Controllers
                         album.CoverImage = await _fileService.SaveFileAsync(coverFile, "covers");
                     }
                 }
+
+                if (SelectedTrackIds != null && SelectedTrackIds.Any())
+                {
+                    var firstTrackId = SelectedTrackIds.First();
+                    var firstTrack = await _context.Tracks.FirstOrDefaultAsync(t => t.TrackId == firstTrackId);
+                    if (firstTrack != null)
+                    {
+                        album.ArtistId = firstTrack.ArtistId;
+                    }
+                }
+
                 await _albumService.AddAlbumAsync(album);
+
+                if (SelectedTrackIds != null && SelectedTrackIds.Any())
+                {
+                    var tracks = await _context.Tracks
+                        .Where(t => SelectedTrackIds.Contains(t.TrackId))
+                        .ToListAsync();
+                    foreach (var track in tracks)
+                    {
+                        track.AlbumId = album.AlbumId;
+                    }
+                    await _context.SaveChangesAsync();
+                }
+
                 TempData["SuccessMessage"] = "Đã thêm album thành công!";
                 return RedirectToAction(nameof(Index));
             }
 
-            var artists = await _artistService.GetAllArtistsAsync(null);
-            ViewBag.Artists = new SelectList(artists, "ArtistId", "Name", album.ArtistId);
+            var allTracks = await _trackService.GetAllTracksAsync("");
+            ViewBag.AllTracks = allTracks;
             return View(album);
         }
 
@@ -85,14 +121,21 @@ namespace Melodify.Areas.Admin.Controllers
                 ReleaseYear = album.ReleaseYear
             };
 
-            var artists = await _artistService.GetAllArtistsAsync(null);
-            ViewBag.Artists = new SelectList(artists, "ArtistId", "Name", album.ArtistId);
+            var allTracks = await _trackService.GetAllTracksAsync("");
+            ViewBag.AllTracks = allTracks;
+
+            var currentTrackIds = await _context.Tracks
+                .Where(t => t.AlbumId == id)
+                .Select(t => t.TrackId)
+                .ToListAsync();
+            ViewBag.CurrentTrackIds = currentTrackIds;
+
             return View(entity);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, Album album, IFormFile? newCoverFile)
+        public async Task<IActionResult> Edit(int id, Album album, IFormFile? newCoverFile, List<int>? SelectedTrackIds)
         {
             if (id != album.AlbumId)
             {
@@ -107,11 +150,22 @@ namespace Melodify.Areas.Admin.Controllers
                     return NotFound();
                 }
 
+                int? computedArtistId = null;
+                if (SelectedTrackIds != null && SelectedTrackIds.Any())
+                {
+                    var firstTrackId = SelectedTrackIds.First();
+                    var firstTrack = await _context.Tracks.FirstOrDefaultAsync(t => t.TrackId == firstTrackId);
+                    if (firstTrack != null)
+                    {
+                        computedArtistId = firstTrack.ArtistId;
+                    }
+                }
+
                 var entity = new Album
                 {
                     AlbumId = album.AlbumId,
                     Title = album.Title,
-                    ArtistId = album.ArtistId,
+                    ArtistId = computedArtistId,
                     CoverImage = original.CoverImage,
                     ReleaseYear = album.ReleaseYear
                 };
@@ -131,12 +185,39 @@ namespace Melodify.Areas.Admin.Controllers
                 }
 
                 await _albumService.UpdateAlbumAsync(entity);
+
+                var previousTracks = await _context.Tracks
+                    .Where(t => t.AlbumId == id)
+                    .ToListAsync();
+                foreach (var track in previousTracks)
+                {
+                    track.AlbumId = null;
+                }
+
+                if (SelectedTrackIds != null && SelectedTrackIds.Any())
+                {
+                    var newTracks = await _context.Tracks
+                        .Where(t => SelectedTrackIds.Contains(t.TrackId))
+                        .ToListAsync();
+                    foreach (var track in newTracks)
+                    {
+                        track.AlbumId = id;
+                    }
+                }
+
+                await _context.SaveChangesAsync();
+
                 TempData["SuccessMessage"] = "Đã cập nhật album thành công!";
                 return RedirectToAction(nameof(Index));
             }
 
-            var artists = await _artistService.GetAllArtistsAsync(null);
-            ViewBag.Artists = new SelectList(artists, "ArtistId", "Name", album.ArtistId);
+            var allTracksReload = await _trackService.GetAllTracksAsync("");
+            ViewBag.AllTracks = allTracksReload;
+            var currentTrackIds = await _context.Tracks
+                .Where(t => t.AlbumId == id)
+                .Select(t => t.TrackId)
+                .ToListAsync();
+            ViewBag.CurrentTrackIds = currentTrackIds;
             return View(album);
         }
 

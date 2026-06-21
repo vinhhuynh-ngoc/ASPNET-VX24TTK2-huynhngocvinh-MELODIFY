@@ -6,10 +6,11 @@ namespace Melodify.Models.DTOs
     {
         public int AlbumId { get; set; }
         public string Title { get; set; }
-        public int ArtistId { get; set; }
+        public int? ArtistId { get; set; }
         public string ArtistName { get; set; }
         public string? CoverImage { get; set; }
         public int ReleaseYear { get; set; }
+        public List<ArtistDto> Artists { get; set; } = new List<ArtistDto>();
         public List<TrackDto> Tracks { get; set; } = new List<TrackDto>();
     }
 }

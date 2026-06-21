@@ -13,7 +13,22 @@
         <span class="hero-type">Album</span>
         <h1 class="hero-title">@Model.Title</h1>
         <div class="hero-meta">
-            <a href="/Artist/Detail/@Model.ArtistId" class="fw-bold text-white hover-underline">@Model.ArtistName</a>
+            @if (Model.Artists != null && Model.Artists.Any())
+            {
+                for (int i = 0; i < Model.Artists.Count; i++)
+                {
+                    var artist = Model.Artists[i];
+                    <a href="/Artist/Detail/@artist.ArtistId" class="fw-bold text-white hover-underline">@artist.Name</a>
+                    if (i < Model.Artists.Count - 1)
+                    {
+                        <span class="text-white">, </span>
+                    }
+                }
+            }
+            else
+            {
+                <a href="/Artist/Detail/@Model.ArtistId" class="fw-bold text-white hover-underline">@Model.ArtistName</a>
+            }
             <span class="hero-meta-secondary">&bull;</span>
             <span class="hero-meta-secondary">@Model.ReleaseYear</span>
             <span class="hero-meta-secondary">&bull;</span>

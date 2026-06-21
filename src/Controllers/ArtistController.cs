@@ -45,7 +45,7 @@ namespace Melodify.Controllers
                 .ToList();
 
             var allAlbums = await _albumService.GetAllAlbumsAsync();
-            var artistAlbums = allAlbums.Where(a => a.ArtistId == id).ToList();
+            var artistAlbums = allAlbums.Where(a => a.ArtistId == id || (a.Artists != null && a.Artists.Any(ar => ar.ArtistId == id))).ToList();
 
             ViewBag.PopularTracks = popularTracks;
             ViewBag.Albums = artistAlbums;

@@ -5,74 +5,113 @@
     ViewData["Title"] = "Chỉnh sửa bài hát";
 }
 
-<div class="mb-4 text-white">
-    <a href="/Admin/Tracks" class="text-secondary hover-underline text-decoration-none">
-        <i class="bi bi-chevron-left me-2"></i>Quay lại danh sách
-    </a>
-    <h1 class="fw-bold fs-3 mt-3">Chỉnh sửa bài hát</h1>
-</div>
+<nav class="flex items-center gap-1 text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-6">
+    <a class="hover:text-foreground" href="/Admin">Admin</a>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-3"><path d="m9 18 6-6-6-6"></path></svg>
+    <a class="hover:text-foreground" href="/Admin/Tracks">Bài hát</a>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-3"><path d="m9 18 6-6-6-6"></path></svg>
+    <span class="text-foreground">Chỉnh sửa</span>
+</nav>
+<h1 class="font-display text-3xl font-extrabold mb-6">Chỉnh sửa bài hát</h1>
 
-<div class="card bg-dark text-white border-secondary p-4 rounded" style="background-color: var(--bg-card);">
-    <form asp-area="Admin" asp-controller="Tracks" asp-action="Edit" asp-route-id="@Model.TrackId" method="post" enctype="multipart/form-data">
-        @Html.AntiForgeryToken()
-        <input type="hidden" asp-for="TrackId" />
-        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+<form asp-area="Admin" asp-controller="Tracks" asp-action="Edit" asp-route-id="@Model.TrackId" method="post" enctype="multipart/form-data" class="grid gap-6 lg:grid-cols-[2fr_1fr]">
+    @Html.AntiForgeryToken()
+    <input type="hidden" asp-for="TrackId" />
 
-        <div class="row">
-            <div class="col-12 col-md-6 mb-3">
-                <label asp-for="Title" class="form-label fw-bold">Tiêu đề bài hát *</label>
-                <input asp-for="Title" class="form-control bg-secondary text-white border-0" placeholder="Nhập tên bài hát" required />
-                <span asp-validation-for="Title" class="text-danger"></span>
-            </div>
+    <div class="space-y-6">
+        <div asp-validation-summary="ModelOnly" class="text-red-500 text-sm"></div>
 
-            <div class="col-12 col-md-6 mb-3">
-                <label asp-for="Genre" class="form-label fw-bold">Thể loại</label>
-                <input asp-for="Genre" class="form-control bg-secondary text-white border-0" placeholder="Ví dụ: Pop, Rap, Indie, Ballad" />
-                <span asp-validation-for="Genre" class="text-danger"></span>
-            </div>
-        </div>
+        <label class="block">
+            <span class="mb-1 block text-xs font-semibold uppercase tracking-widest text-muted-foreground">Tiêu đề bài hát *</span>
+            <input asp-for="Title" required class="h-11 w-full rounded-xl border border-border bg-background px-3 text-sm focus:border-lime focus:outline-none">
+            <span asp-validation-for="Title" class="text-red-500 text-xs mt-1 block"></span>
+        </label>
 
-        <div class="row">
-            <div class="col-12 col-md-6 mb-3">
-                <label asp-for="ArtistId" class="form-label fw-bold">Nghệ sĩ trình bày *</label>
-                <select asp-for="ArtistId" asp-items="ViewBag.Artists" class="form-select bg-secondary text-white border-0" required>
+        <div class="grid gap-4 md:grid-cols-2">
+            <label class="block">
+                <span class="mb-1 block text-xs font-semibold uppercase tracking-widest text-muted-foreground">Nghệ sĩ trình bày *</span>
+                <select asp-for="ArtistId" asp-items="ViewBag.Artists" class="h-11 w-full rounded-xl border border-border bg-background px-3 text-sm focus:border-lime focus:outline-none" required>
                 </select>
-                <span asp-validation-for="ArtistId" class="text-danger"></span>
-            </div>
+                <span asp-validation-for="ArtistId" class="text-red-500 text-xs mt-1 block"></span>
+            </label>
 
-            <div class="col-12 col-md-6 mb-3">
-                <label asp-for="AlbumId" class="form-label fw-bold">Album</label>
-                <select asp-for="AlbumId" asp-items="ViewBag.Albums" class="form-select bg-secondary text-white border-0">
+            <label class="block">
+                <span class="mb-1 block text-xs font-semibold uppercase tracking-widest text-muted-foreground">Album</span>
+                <select asp-for="AlbumId" asp-items="ViewBag.Albums" class="h-11 w-full rounded-xl border border-border bg-background px-3 text-sm focus:border-lime focus:outline-none">
                     <option value="">-- Không có album --</option>
                 </select>
-                <span asp-validation-for="AlbumId" class="text-danger"></span>
-            </div>
+                <span asp-validation-for="AlbumId" class="text-red-500 text-xs mt-1 block"></span>
+            </label>
         </div>
 
-        <div class="row mt-3">
-            <div class="col-12 col-md-6 mb-4">
-                <label asp-for="NewAudioFile" class="form-label fw-bold">Tệp âm thanh mới (Không bắt buộc)</label>
-                <input asp-for="NewAudioFile" type="file" class="form-control bg-secondary text-white border-0" accept=".mp3" />
-                <span asp-validation-for="NewAudioFile" class="text-danger"></span>
-            </div>
+        <label class="block">
+            <span class="mb-1 block text-xs font-semibold uppercase tracking-widest text-muted-foreground">Thể loại</span>
+            <input asp-for="Genre" class="h-11 w-full rounded-xl border border-border bg-background px-3 text-sm focus:border-lime focus:outline-none" placeholder="Ví dụ: Pop, Rap, Indie, Ballad">
+            <span asp-validation-for="Genre" class="text-red-500 text-xs mt-1 block"></span>
+        </label>
 
-            <div class="col-12 col-md-6 mb-4">
-                <label asp-for="NewCoverFile" class="form-label fw-bold">Ảnh bìa bài hát mới (Không bắt buộc)</label>
-                <input asp-for="NewCoverFile" type="file" class="form-control bg-secondary text-white border-0" accept=".jpg,.jpeg,.png,.webp" />
-                <span asp-validation-for="NewCoverFile" class="text-danger"></span>
+        <label class="block">
+            <span class="mb-1 block text-xs font-semibold uppercase tracking-widest text-muted-foreground">Tệp âm thanh mới (Không bắt buộc)</span>
+            <div class="rounded-xl border border-border bg-background p-3">
+                <input asp-for="NewAudioFile" type="file" accept=".mp3" class="text-sm file:mr-3 file:rounded-full file:border-0 file:bg-lime file:px-3 file:py-1.5 file:text-xs file:font-bold file:text-lime-foreground">
+            </div>
+            <span asp-validation-for="NewAudioFile" class="text-red-500 text-xs mt-1 block"></span>
+        </label>
+
+        <div class="flex gap-3 pt-2">
+            <button type="submit" class="rounded-full bg-lime px-5 py-2.5 text-sm font-bold text-lime-foreground">Cập nhật bài hát</button>
+            <a class="rounded-full border border-border px-5 py-2.5 text-sm font-semibold flex items-center justify-center text-foreground hover:bg-border/50" href="/Admin/Tracks">Hủy</a>
+        </div>
+    </div>
+
+    <div>
+        <label class="block">
+            <span class="mb-1 block text-xs font-semibold uppercase tracking-widest text-muted-foreground">Ảnh bìa mới</span>
+            <label class="grid h-[200px] w-[200px] cursor-pointer place-items-center overflow-hidden rounded-xl border-2 border-dashed border-border bg-surface hover:border-lime relative" id="cover-preview-container">
+                <input asp-for="NewCoverFile" accept=".jpg,.jpeg,.png,.webp" class="hidden" type="file" id="cover-upload">
                 @if (!string.IsNullOrEmpty(ViewBag.CoverImage))
                 {
-                    <div class="mt-3">
-                        <span class="d-block text-secondary mb-2">Ảnh bìa hiện tại:</span>
-                        <img src="@ViewBag.CoverImage" style="width: 100px; height: 100px; object-fit: cover; border-radius: 4px;" alt="" />
+                    <div class="text-center text-muted-foreground hidden" id="cover-placeholder">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto size-8"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"></rect><circle cx="9" cy="9" r="2"></circle><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"></path></svg>
+                        <p class="mt-2 text-xs">200×200</p>
                     </div>
+                    <img id="cover-preview" src="@ViewBag.CoverImage" class="absolute inset-0 w-full h-full object-cover rounded-xl" />
                 }
-            </div>
-        </div>
+                else
+                {
+                    <div class="text-center text-muted-foreground" id="cover-placeholder">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto size-8"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"></rect><circle cx="9" cy="9" r="2"></circle><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"></path></svg>
+                        <p class="mt-2 text-xs">200×200</p>
+                    </div>
+                    <img id="cover-preview" class="absolute inset-0 w-full h-full object-cover hidden rounded-xl" />
+                }
+            </label>
+            <p class="mt-2 text-xs text-muted-foreground">Chọn ảnh mới để thay thế</p>
+        </label>
+    </div>
+</form>
 
-        <div class="mt-4">
-            <button type="submit" class="btn btn-success rounded-pill px-5 py-2 fw-bold text-dark me-3">Cập nhật bài hát</button>
-            <a href="/Admin/Tracks" class="btn btn-outline-secondary rounded-pill px-5 py-2 fw-bold">Hủy</a>
-        </div>
-    </form>
-</div>
+@section Scripts {
+    <script>
+        const coverUpload = document.getElementById('cover-upload');
+        const coverPreview = document.getElementById('cover-preview');
+        const coverPlaceholder = document.getElementById('cover-placeholder');
+
+        if (coverUpload) {
+            coverUpload.addEventListener('change', function() {
+                if (this.files && this.files[0]) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        coverPreview.src = e.target.result;
+                        coverPreview.classList.remove('hidden');
+                        coverPlaceholder.classList.add('hidden');
+                    }
+                    reader.readAsDataURL(this.files[0]);
+                } else {
+                    coverPreview.classList.add('hidden');
+                    coverPlaceholder.classList.remove('hidden');
+                }
+            });
+        }
+    </script>
+}
