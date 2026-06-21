@@ -1,70 +1,67 @@
-# MELODIFY — Hướng dẫn chạy hệ thống
+# MELODIFY - Hướng dẫn chạy hệ thống
 
-Mô tả ngắn: ứng dụng web ASP.NET Core (MELODIFY). Tài liệu này hướng dẫn cách cài đặt, cấu hình và chạy toàn bộ hệ thống cục bộ.
+Melodify là ứng dụng web nghe nhạc trực tuyến được phát triển trên nền tảng ASP.NET Core MVC, Entity Framework Core và MySQL. Hướng dẫn này giúp người dùng clone code từ repository và chạy ứng dụng trên máy cục bộ.
 
+## Yêu cầu hệ thống
+- .NET SDK 9.0 trở lên
+- Trình duyệt web hiện đại (Chrome, Edge, Firefox, Safari)
 
-**Yêu cầu (Prerequisites)**
-- .NET SDK 9.0 (hoặc tương thích với target framework)
-- MySQL server (hoặc DB tương thích mà project dùng)
-- `dotnet-ef` CLI (để chạy migrations):
-```bash
-dotnet tool install --global dotnet-ef
-```
+## Cấu hình Database
+Hệ thống được cấu hình sẵn trong file launchSettings.json để kết nối với cơ sở dữ liệu MySQL từ xa (sql12.freesqldatabase.com). Người dùng có thể chạy ứng dụng ngay mà không cần thiết lập MySQL cục bộ.
 
-**Cấu hình**
-- Sao chép và chỉnh `appsettings.Development.json` hoặc chỉnh trực tiếp `appsettings.json` để đặt connection string cho database. Ví dụ:
+Nếu muốn thay đổi kết nối đến MySQL cục bộ của bạn, hãy thay đổi giá trị DefaultConnection trong file appsettings.json hoặc appsettings.Development.json:
 
 ```json
 "ConnectionStrings": {
-  "DefaultConnection": "server=localhost;port=3306;database=melodify;user=root;password=your_password"
+  "DefaultConnection": "Server=localhost;Port=3306;Database=melodify;Uid=root;Pwd=mat_khau_cua_ban;"
 }
 ```
 
-- Thay vì commit secrets, bạn có thể dùng biến môi trường (Windows/Mac/Linux):
+## Hướng dẫn Clone và Chạy Ứng dụng
 
+1. Clone repository về máy cục bộ:
 ```bash
-export ConnectionStrings__DefaultConnection="server=...;user=...;password=..."
+git clone https://github.com/vinhhuynh-ngoc/MELODIFY.git
+cd MELODIFY
 ```
 
-**Cài đặt & chạy**
-
-1. Lấy code và restore package:
-
+2. Di chuyển đến thư mục nguồn của dự án:
 ```bash
-git clone <repo-url>
-cd MELODIFY
+cd src
+```
+
+3. Restore các gói thư viện:
+```bash
 dotnet restore
 ```
 
-2. Build và áp migrations:
-
+4. Build dự án:
 ```bash
 dotnet build
-dotnet ef database update
 ```
 
-3. Chạy ứng dụng:
-
+5. Run ứng dụng:
 ```bash
 dotnet run
-# hoặc
-dotnet run --urls "http://localhost:5000"
 ```
 
-4. Mở trình duyệt tại `http://localhost:5000` (hoặc URL hiển thị trên console).
+Hệ thống sẽ được khởi chạy và lắng nghe mặc định tại địa chỉ: http://localhost:5103
 
-**Seed dữ liệu & uploads**
-- Project chứa `Data/SeedData.cs`. Nếu `SeedData` được gọi trong `Program.cs`, dữ liệu mẫu sẽ tự động được tạo khi lần chạy đầu tiên sau khi đã áp migrations.
-- Thư mục `wwwroot/uploads/` và file `wwwroot/tracks.json` được giữ trong repo để lưu sample uploads; đừng xóa nếu muốn giữ dữ liệu mẫu.
+## Thông tin Tài khoản Mặc định
+Sau khi chạy ứng dụng và database được khởi tạo, dữ liệu mẫu (Seed Data) sẽ tự động được thêm vào hệ thống với các tài khoản mặc định sau:
 
-**Lưu ý về Git**
-- File có thể cài lại (build artifacts, `obj/`, `bin/`, `wwwroot/lib/`, `node_modules/`) đã được thêm vào `.gitignore` và đã được untrack từ repository.
-- Các file config như `appsettings*.json`, seed data (`Data/SeedData.cs`) và uploads (`wwwroot/uploads/`, `wwwroot/tracks.json`) được giữ tracked như yêu cầu.
+1. Tài khoản Quản trị (Admin):
+- Email: admin@melodify.com
+- Mật khẩu: Admin123
 
-**Phát triển thêm**
-- Nếu cần rebuild client libraries, dùng `libman`/`npm` theo cấu hình của project để tái tạo `wwwroot/lib/`.
+2. Tài khoản Người dùng thường (User):
+- Email: user@melodify.com
+- Mật khẩu: User123
 
-**Liên hệ**
-- Người thực hiện: Huỳnh Ngọc Vinh-VX24TTK2
+## Cấu trúc thư mục chính của dự án
+- docs/: Thư mục chứa tài liệu hệ thống
+- src/: Thư mục chứa mã nguồn chính của ứng dụng web ASP.NET Core
+- thesis/: Thư mục chứa các báo cáo và file khóa luận liên quan
 
----
+## Liên hệ
+- Người thực hiện: Huỳnh Ngọc Vinh - VX24TTK2
